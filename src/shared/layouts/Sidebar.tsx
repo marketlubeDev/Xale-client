@@ -1,12 +1,10 @@
-import { useState } from 'react';
-import XaleLogoImage from '../../assets/sidebar/xaleLogo.svg';
-import DashboardIconImage from '../../assets/sidebar/dashboardIcon.svg';
-import LeadsIconImage from '../../assets/sidebar/leadsIcon.svg';
-import ApplicationIconImage from '../../assets/sidebar/applicationIcon.svg';
-import VisaIconImage from '../../assets/sidebar/visaIcon.svg';
-import StageManagementIconImage from '../../assets/sidebar/stageManagementIcon.svg';
-
-
+import { useState } from "react";
+import XaleLogoImage from "/icons/sidebar/xaleLogo.svg";
+import DashboardIconImage from "/icons/sidebar/dashboardIcon.svg";
+import LeadsIconImage from "/icons/sidebar/leadsIcon.svg";
+import ApplicationIconImage from "/icons/sidebar/applicationIcon.svg";
+import VisaIconImage from "/icons/sidebar/visaIcon.svg";
+import StageManagementIconImage from "/icons/sidebar/stageManagementIcon.svg";
 
 // Arrow Down Icon Component
 function ArrowDownSLine({ className }: { className?: string }) {
@@ -19,10 +17,7 @@ function ArrowDownSLine({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M12 15L7 10H17L12 15Z"
-        fill="rgba(14, 18, 27, 1)"
-      />
+      <path d="M12 15L7 10H17L12 15Z" fill="rgba(14, 18, 27, 1)" />
     </svg>
   );
 }
@@ -36,9 +31,13 @@ export default function Sidebar() {
       {/* Header Section - User Profile */}
       <div className="border-b border-[#e6e8e7] flex gap-2 items-center px-8 py-4 relative w-full">
         <div className="flex gap-2 items-center relative shrink-0">
-        <div className="relative shrink-0 w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[#051912] to-[#0a2e24] flex items-center justify-center">
-        <img src={XaleLogoImage} alt="Xale Logo" className="w-[40px] h-[40px]" />
-        </div>
+          <div className="relative shrink-0 w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[#051912] to-[#0a2e24] flex items-center justify-center">
+            <img
+              src={XaleLogoImage}
+              alt="Xale Logo"
+              className="w-[40px] h-[40px]"
+            />
+          </div>
           <div className="flex flex-col gap-1 items-start justify-center relative shrink-0">
             <div className="flex items-center justify-between not-italic relative shrink-0 te">
               <div className="flex flex-col h-6 justify-end leading-none relative shrink-0 text-[#051912] text-lg tracking-[-0.72px] w-[21px]">
@@ -61,11 +60,15 @@ export default function Sidebar() {
       <div className="relative flex flex-col gap-1 items-start pb-0 pl-8 pr-4 pt-6 w-full flex-1 overflow-y-auto">
         {/* Active indicator bar */}
         <div className="absolute h-10 left-0.5 rounded-br-[20px] rounded-tr-[20px] top-[106px] w-2 bg-[#051912]" />
-        
+
         {/* Dashboard Nav Item */}
         <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
           <div className="shrink-0 w-5 h-5">
-            <img src={DashboardIconImage} alt="Dashboard Icon" className="w-5 h-5" />
+            <img
+              src={DashboardIconImage}
+              alt="Dashboard Icon"
+              className="w-5 h-5"
+            />
           </div>
           <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
             Dashboard
@@ -82,7 +85,11 @@ export default function Sidebar() {
               onClick={() => setIsStagesOpen(!isStagesOpen)}
               className="flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity"
             >
-              <div className={`flex-none transition-transform duration-200 ${isStagesOpen ? 'rotate-180' : ''}`}>
+              <div
+                className={`flex-none transition-transform duration-200 ${
+                  isStagesOpen ? "rotate-180" : ""
+                }`}
+              >
                 <ArrowDownSLine className="overflow-hidden relative w-6 h-6" />
               </div>
             </button>
@@ -93,7 +100,11 @@ export default function Sidebar() {
               {/* Leads - Active */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full bg-[#f5f7f6]">
                 <div className="flex gap-2 items-center justify-center p-0.5 relative shrink-0 w-5 h-5">
-                  <img src={LeadsIconImage} alt="Leads Icon" className="w-5 h-5" />
+                  <img
+                    src={LeadsIconImage}
+                    alt="Leads Icon"
+                    className="w-5 h-5"
+                  />
                 </div>
                 <p className="font-medium leading-normal relative shrink-0 text-base whitespace-nowrap tracking-[-0.32px] text-[#051912]">
                   Leads
@@ -103,7 +114,11 @@ export default function Sidebar() {
               {/* Application */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
                 <div className="shrink-0 w-5 h-5">
-                  <img src={ApplicationIconImage} alt="Application Icon" className="w-5 h-5" />
+                  <img
+                    src={ApplicationIconImage}
+                    alt="Application Icon"
+                    className="w-5 h-5"
+                  />
                 </div>
                 <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
                   Application
@@ -113,7 +128,11 @@ export default function Sidebar() {
               {/* Visa */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
                 <div className="shrink-0 w-5 h-5">
-                  <img src={VisaIconImage} alt="Visa Icon" className="w-5 h-5" />
+                  <img
+                    src={VisaIconImage}
+                    alt="Visa Icon"
+                    className="w-5 h-5"
+                  />
                 </div>
                 <p className="font-normal leading-normal relative shrink-0 text-[#374741] text-base whitespace-nowrap tracking-[-0.32px]">
                   Visa
@@ -133,7 +152,11 @@ export default function Sidebar() {
               onClick={() => setIsAdminOpen(!isAdminOpen)}
               className="flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity"
             >
-              <div className={`flex-none transition-transform duration-200 ${isAdminOpen ? 'rotate-180' : ''}`}>
+              <div
+                className={`flex-none transition-transform duration-200 ${
+                  isAdminOpen ? "rotate-180" : ""
+                }`}
+              >
                 <ArrowDownSLine className="overflow-hidden relative w-6 h-6" />
               </div>
             </button>
@@ -144,7 +167,11 @@ export default function Sidebar() {
               {/* Stage management */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
                 <div className="shrink-0 w-5 h-5">
-                  <img src={StageManagementIconImage} alt="Stage Management Icon" className="w-5 h-5" />
+                  <img
+                    src={StageManagementIconImage}
+                    alt="Stage Management Icon"
+                    className="w-5 h-5"
+                  />
                 </div>
                 <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
                   Stage management
@@ -157,4 +184,3 @@ export default function Sidebar() {
     </div>
   );
 }
-
