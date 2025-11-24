@@ -1,31 +1,10 @@
 import { useState } from 'react';
 import XaleLogoImage from '../../assets/sidebar/xaleLogo.svg';
-import DashboardIconImage from '../../assets/sidebar/dashboardIcon.svg';
-import LeadsIconImage from '../../assets/sidebar/leadsIcon.svg';
-import ApplicationIconImage from '../../assets/sidebar/applicationIcon.svg';
-import VisaIconImage from '../../assets/sidebar/visaIcon.svg';
-import StageManagementIconImage from '../../assets/sidebar/stageManagementIcon.svg';
+import { ApplicationIcon, DashboardIcon, LeadsIcon, RotateArrowIcon, StageManagementIcon, VisaIcon ,AddIcon } from '../../utilities/icons';
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
+import { Dropdown } from '../../components/common/Dropdowns/Dropdown';
 
 
-
-// Arrow Down Icon Component
-function ArrowDownSLine({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12 15L7 10H17L12 15Z"
-        fill="rgba(14, 18, 27, 1)"
-      />
-    </svg>
-  );
-}
 
 export default function Sidebar() {
   const [isStagesOpen, setIsStagesOpen] = useState<boolean>(true);
@@ -65,7 +44,7 @@ export default function Sidebar() {
         {/* Dashboard Nav Item */}
         <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
           <div className="shrink-0 w-5 h-5">
-            <img src={DashboardIconImage} alt="Dashboard Icon" className="w-5 h-5" />
+           <DashboardIcon />
           </div>
           <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
             Dashboard
@@ -83,7 +62,7 @@ export default function Sidebar() {
               className="flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity"
             >
               <div className={`flex-none transition-transform duration-200 ${isStagesOpen ? 'rotate-180' : ''}`}>
-                <ArrowDownSLine className="overflow-hidden relative w-6 h-6" />
+                <RotateArrowIcon className="overflow-hidden relative w-6 h-6" />
               </div>
             </button>
           </div>
@@ -93,7 +72,7 @@ export default function Sidebar() {
               {/* Leads - Active */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full bg-[#f5f7f6]">
                 <div className="flex gap-2 items-center justify-center p-0.5 relative shrink-0 w-5 h-5">
-                  <img src={LeadsIconImage} alt="Leads Icon" className="w-5 h-5" />
+                  <LeadsIcon />
                 </div>
                 <p className="font-medium leading-normal relative shrink-0 text-base whitespace-nowrap tracking-[-0.32px] text-[#051912]">
                   Leads
@@ -103,7 +82,7 @@ export default function Sidebar() {
               {/* Application */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
                 <div className="shrink-0 w-5 h-5">
-                  <img src={ApplicationIconImage} alt="Application Icon" className="w-5 h-5" />
+                  <ApplicationIcon />
                 </div>
                 <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
                   Application
@@ -113,7 +92,7 @@ export default function Sidebar() {
               {/* Visa */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
                 <div className="shrink-0 w-5 h-5">
-                  <img src={VisaIconImage} alt="Visa Icon" className="w-5 h-5" />
+                  <VisaIcon />
                 </div>
                 <p className="font-normal leading-normal relative shrink-0 text-[#374741] text-base whitespace-nowrap tracking-[-0.32px]">
                   Visa
@@ -134,7 +113,7 @@ export default function Sidebar() {
               className="flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity"
             >
               <div className={`flex-none transition-transform duration-200 ${isAdminOpen ? 'rotate-180' : ''}`}>
-                <ArrowDownSLine className="overflow-hidden relative w-6 h-6" />
+                <RotateArrowIcon className="overflow-hidden relative w-6 h-6" />
               </div>
             </button>
           </div>
@@ -144,7 +123,7 @@ export default function Sidebar() {
               {/* Stage management */}
               <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
                 <div className="shrink-0 w-5 h-5">
-                  <img src={StageManagementIconImage} alt="Stage Management Icon" className="w-5 h-5" />
+                  <StageManagementIcon />
                 </div>
                 <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
                   Stage management
@@ -153,6 +132,10 @@ export default function Sidebar() {
             </>
           )}
         </div>
+
+        <PrimaryButton title="Add Lead" onClick={() => {}} icon={<AddIcon />} />
+
+        <Dropdown/>
       </div>
     </div>
   );
