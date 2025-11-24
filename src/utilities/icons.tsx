@@ -1,15 +1,22 @@
 import React from "react";
 
+export interface IconProps {
+  color?: string;
+  size?: number;
+  className?: string;
+}
+
 export function SearchIcon({
   color = "#697571",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -26,14 +33,15 @@ export function SearchIcon({
 
 export function NotificationIcon({
   color = "#051912",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 24,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
     >
@@ -64,14 +72,15 @@ export function NotificationIcon({
 
 export function SupportIcon({
   color = "#051912",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 22,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
+      width={size}
+      height={size}
       viewBox="0 0 21 20"
       fill="none"
     >
@@ -85,14 +94,15 @@ export function SupportIcon({
 
 export function DashboardIcon({
   color = "#697571",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -130,14 +140,15 @@ export function DashboardIcon({
 
 export function LeadsIcon({
   color = "#051912",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 18,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
+      width={size}
+      height={size}
       viewBox="0 0 18 18"
       fill="none"
     >
@@ -154,14 +165,15 @@ export function LeadsIcon({
 
 export function ApplicationIcon({
   color = "#697571",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -199,14 +211,15 @@ export function ApplicationIcon({
 
 export function VisaIcon({
   color = "#697571",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -223,14 +236,15 @@ export function VisaIcon({
 
 export function StageManagementIcon({
   color = "#697571",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -276,14 +290,15 @@ export function StageManagementIcon({
 //..................................................................................................................Common Icons..................................................................................................................
 export function FilterIcon({
   color = "#1E302A",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -325,14 +340,15 @@ export function FilterIcon({
 
 export function DropDownHamburgerIcon({
   color = "#1E302A",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -360,11 +376,18 @@ export function DropDownHamburgerIcon({
 
 export function ChevronRightIcon({
   color = "#828C88",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 20 20"
+      fill="none"
+    >
       <path
         d="M7.5 4.5L12.5 9.5L7.5 14.5"
         stroke={color}
@@ -378,14 +401,15 @@ export function ChevronRightIcon({
 
 export function MoreVerticalIcon({
   color = "#0E121B",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 24,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
     >
@@ -400,14 +424,15 @@ export function MoreVerticalIcon({
 
 export function AddIcon({
   color = "white",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 24,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
     >
@@ -433,14 +458,15 @@ export function AddIcon({
 
 export function GridIcon({
   color = "#051912",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -478,14 +504,15 @@ export function GridIcon({
 
 export function ListIcon({
   color = "#828C88",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 18,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="15"
+      width={size}
+      height={size}
       viewBox="0 0 18 15"
       fill="none"
     >
@@ -502,14 +529,15 @@ export function ListIcon({
 
 export function BoardIcon({
   color = "#828C88",
-}: {
-  color?: string;
-}): React.ReactElement {
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
     >
@@ -534,16 +562,14 @@ export function BoardIcon({
 export function RotateArrowIcon({
   className,
   color = "#0E121B",
-}: {
-  className?: string;
-  color?: string;
-}): React.ReactElement {
+  size = 24,
+}: IconProps): React.ReactElement {
   return (
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
     >
