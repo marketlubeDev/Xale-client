@@ -3,6 +3,7 @@ import XaleLogoImage from '../../assets/sidebar/xaleLogo.svg';
 import { ApplicationIcon, DashboardIcon, LeadsIcon, RotateArrowIcon, StageManagementIcon, VisaIcon ,AddIcon } from '../../utilities/icons';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { Dropdown } from '../../components/common/Dropdowns/Dropdown';
+import SideBarItem from '../../components/sidebar/SideBarItem';
 
 
 
@@ -42,14 +43,8 @@ export default function Sidebar() {
         <div className="absolute h-10 left-0.5 rounded-br-[20px] rounded-tr-[20px] top-[106px] w-2 bg-[#051912]" />
         
         {/* Dashboard Nav Item */}
-        <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
-          <div className="shrink-0 w-5 h-5">
-           <DashboardIcon />
-          </div>
-          <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
-            Dashboard
-          </p>
-        </div>
+        <SideBarItem text="Dashboard" icon={<DashboardIcon />} />
+
 
         {/* STAGES Section */}
         <div className="flex flex-col gap-1 items-start px-0 py-1 relative shrink-0 w-full">
@@ -121,21 +116,14 @@ export default function Sidebar() {
           {isAdminOpen && (
             <>
               {/* Stage management */}
-              <div className="flex gap-2.5 h-11 items-center overflow-hidden px-3 py-2 rounded-xl shrink-0 w-full">
-                <div className="shrink-0 w-5 h-5">
-                  <StageManagementIcon />
-                </div>
-                <p className="font-normal leading-normal relative shrink-0 text-[#505e59] text-base whitespace-nowrap tracking-[-0.32px]">
-                  Stage management
-                </p>
-              </div>
+             <SideBarItem text="Stage management" icon={<StageManagementIcon />} />  
             </>
           )}
         </div>
 
         <PrimaryButton title="Add Lead" onClick={() => {}} icon={<AddIcon />} />
 
-        <Dropdown/>
+        <Dropdown />
       </div>
     </div>
   );

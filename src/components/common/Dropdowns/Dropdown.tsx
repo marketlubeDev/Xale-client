@@ -15,6 +15,7 @@ interface DropDownProps {
   value?: string;
   menuItems?: MenuItem[];
   onSelect?: (label: string) => void;
+  width?: string;
 }
 
 
@@ -23,6 +24,7 @@ export function Dropdown({
   value,
   menuItems = MENU_ITEMS,
   onSelect,
+  width = "184px",
 }: DropDownProps): React.ReactElement {
   const resolvedValue = value ?? menuItems[0]?.label ?? "";
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -46,7 +48,7 @@ export function Dropdown({
   const handleToggle = () => setIsOpen((prev) => !prev);
 
   return (
-    <div ref={containerRef} className="relative inline-flex w-[184px]">
+    <div ref={containerRef} className={`relative inline-flex w-[${width}]`}>
       <button
         type="button"
         onClick={handleToggle}
