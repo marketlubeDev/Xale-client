@@ -8,11 +8,26 @@ import FormInput from "../components/common/FormInput";
 import FormTextArea from "../components/common/FormTextArea";
 import FormSection from "../components/common/FormSection";
 import ToggleCard from "../components/common/ToggleCard";
-import { MailIcon } from "../utilities/icons";
+import {
+  MailIcon,
+  PhoneIcon,
+  LocationIcon,
+  DashboardIcon,
+  LeadsIcon,
+  ApplicationIcon,
+  VisaIcon,
+  StageManagementIcon,
+  FilterIcon,
+  GridIcon,
+  ListIcon,
+  BoardIcon,
+} from "../utilities/icons";
 import ToggleCardGroup from "../components/common/ToggleCardGroup";
 
 import ToggleItem from "../components/common/ToggleItem";
 import FormSelector from "../components/common/FormSelector";
+import IconButton from "../components/common/IconButton";
+import IconButtonGrid from "../components/common/IconButtonGrid";
 
 function Addstage() {
   const stageCapabilities = [
@@ -37,6 +52,21 @@ function Addstage() {
       checked: true,
       icon: <MailIcon color="white" />,
     },
+  ];
+
+  const stageIcons = [
+    { id: 1, icon: <MailIcon />, active: false },
+    { id: 2, icon: <PhoneIcon />, active: true },
+    { id: 3, icon: <LocationIcon />, active: false },
+    { id: 4, icon: <DashboardIcon />, active: false },
+    { id: 5, icon: <LeadsIcon />, active: false },
+    { id: 6, icon: <ApplicationIcon />, active: false },
+    { id: 7, icon: <VisaIcon />, active: false },
+    { id: 8, icon: <StageManagementIcon />, active: false },
+    { id: 9, icon: <FilterIcon />, active: false },
+    { id: 10, icon: <GridIcon />, active: false },
+    { id: 11, icon: <ListIcon />, active: false },
+    { id: 12, icon: <BoardIcon />, active: false },
   ];
 
   return (
@@ -181,18 +211,31 @@ function Addstage() {
               </FormSection>
 
               <FormSection title="Visibility settings">
-              <ToggleItem
+                <ToggleItem
                   title="Show in Leads profile/drawer"
                   description="Let users rename a choices when creating it for a lead"
                   checked={true}
                   onChange={() => {}}
                 />
-              <ToggleItem
+                <ToggleItem
                   title="Show in Leads profile/drawer"
                   description="Let users rename a choices when creating it for a lead"
                   checked={true}
                   onChange={() => {}}
                 />
+              </FormSection>
+
+              <FormSection title="Icon">
+                <IconButtonGrid columns={6}>
+                  {stageIcons.map((iconData) => (
+                    <IconButton
+                      key={iconData.id}
+                      icon={iconData.icon}
+                      active={iconData.active}
+                      onClick={() => {}}
+                    />
+                  ))}
+                </IconButtonGrid>
               </FormSection>
             </div>
           </div>
