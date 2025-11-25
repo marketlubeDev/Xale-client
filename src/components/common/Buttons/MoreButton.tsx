@@ -83,12 +83,12 @@ export function MoreButton({
         }`}
       >
         <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/0">
-          <MoreVerticalIcon color="#0E121B" />
+          <MoreVerticalIcon />
         </span>
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full z-20 mt-2 min-w-[160px] rounded-[16px] border border-[#e6e8e7] bg-white p-1 shadow-sm">
+        <div className="absolute right-0 top-full z-20 mt-2 min-w-[160px] rounded-[16px] border border-[var(--color-border-primary)] bg-white p-1 shadow-sm">
           <ul className="flex flex-col gap-1">
             {menuItems?.map((item) => (
               <li key={item?.label}>
@@ -98,14 +98,14 @@ export function MoreButton({
                     setIsOpen(false);
                     onSelect?.(item?.label);
                   }}
-                  className="flex h-9 w-full items-center justify-between rounded-[12px] px-3 text-left text-[#374741] transition-colors hover:bg-[#f4f6f5]"
+                  className="flex h-9 w-full items-center justify-between rounded-[12px] px-3 text-left text-[var(--color-black-8)] transition-colors hover:bg-[var(--color-bg-hover)]"
                 >
-                  <span className="font-['Helvetica_Neue',sans-serif] text-[14px] leading-[19px] tracking-[-0.56px]">
+                  <span className="text-b4 leading-[19px]">
                     {item?.label}
                   </span>
                   {item?.showArrow && (
                     <span className="inline-flex h-5 w-5 items-center justify-center">
-                      <ChevronRightIcon color="#374741" />
+                      <ChevronRightIcon />
                     </span>
                   )}
                 </button>

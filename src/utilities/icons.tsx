@@ -7,7 +7,7 @@ export interface IconProps {
 }
 
 export function SearchIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -32,7 +32,7 @@ export function SearchIcon({
 }
 
 export function NotificationIcon({
-  color = "#051912",
+  color = "var(--color-black-10)",
   size = 24,
   className,
 }: IconProps): React.ReactElement {
@@ -71,7 +71,7 @@ export function NotificationIcon({
 }
 
 export function SupportIcon({
-  color = "#051912",
+  color = "var(--color-black-10)",
   size = 22,
   className,
 }: IconProps): React.ReactElement {
@@ -93,7 +93,7 @@ export function SupportIcon({
 }
 
 export function DashboardIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -139,7 +139,7 @@ export function DashboardIcon({
 }
 
 export function LeadsIcon({
-  color = "#051912",
+  color = "var(--color-black-10)",
   size = 18,
   className,
 }: IconProps): React.ReactElement {
@@ -164,7 +164,7 @@ export function LeadsIcon({
 }
 
 export function ApplicationIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -210,7 +210,7 @@ export function ApplicationIcon({
 }
 
 export function VisaIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -235,7 +235,7 @@ export function VisaIcon({
 }
 
 export function StageManagementIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -289,7 +289,7 @@ export function StageManagementIcon({
 
 //..................................................................................................................Common Icons..................................................................................................................
 export function FilterIcon({
-  color = "#1E302A",
+  color = "var(--color-text-primary)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -339,7 +339,7 @@ export function FilterIcon({
 }
 
 export function DropDownHamburgerIcon({
-  color = "#1E302A",
+  color = "var(--color-text-primary)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -375,7 +375,7 @@ export function DropDownHamburgerIcon({
 }
 
 export function ChevronRightIcon({
-  color = "#828C88",
+  color = "var(--color-black-5)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -400,7 +400,7 @@ export function ChevronRightIcon({
 }
 
 export function MoreVerticalIcon({
-  color = "#0E121B",
+  color = "var(--color-text-dark)",
   size = 24,
   className,
 }: IconProps): React.ReactElement {
@@ -423,7 +423,7 @@ export function MoreVerticalIcon({
 }
 
 export function AddIcon({
-  color = "white",
+  color = "var(--color-bg-primary)",
   size = 24,
   className,
 }: IconProps): React.ReactElement {
@@ -455,7 +455,7 @@ export function AddIcon({
 }
 
 export function MailIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 18,
   className,
 }: IconProps): React.ReactElement {
@@ -489,7 +489,7 @@ export function MailIcon({
 }
 
 export function PhoneIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 18,
   className,
 }: IconProps): React.ReactElement {
@@ -515,7 +515,7 @@ export function PhoneIcon({
 }
 
 export function LocationIcon({
-  color = "#697571",
+  color = "var(--color-black-6)",
   size = 18,
   className,
 }: IconProps): React.ReactElement {
@@ -574,7 +574,7 @@ export function LocationIcon({
   );
 }
 export function GridIcon({
-  color = "#051912",
+  color = "var(--color-black-10)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -620,7 +620,7 @@ export function GridIcon({
 }
 
 export function ListIcon({
-  color = "#828C88",
+  color = "var(--color-black-5)",
   size = 18,
   className,
 }: IconProps): React.ReactElement {
@@ -645,7 +645,7 @@ export function ListIcon({
 }
 
 export function BoardIcon({
-  color = "#828C88",
+  color = "var(--color-black-5)",
   size = 20,
   className,
 }: IconProps): React.ReactElement {
@@ -678,7 +678,7 @@ export function BoardIcon({
 
 export function RotateArrowIcon({
   className,
-  color = "#0E121B",
+  color = "var(--color-text-dark)",
   size = 24,
 }: IconProps): React.ReactElement {
   return (
@@ -700,7 +700,7 @@ export function RotateArrowIcon({
 
 export function TrendUpIcon({
   className,
-  color = "#0FAD14",
+  color = "var(--color-success-trend)",
   size = 20,
 }: IconProps): React.ReactElement {
   return (
@@ -722,9 +722,9 @@ export function TrendUpIcon({
 
 export function TrendDownIcon({
   className,
-  color = "#DA2A46",
+  color = "var(--color-error)",
   size = 20,
-}: IconProps): React.ReactElement {
+  }: IconProps): React.ReactElement {
   return (
     <svg
       className={className}

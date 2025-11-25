@@ -1,11 +1,16 @@
 import Header from "./shared/layouts/Header";
 import Sidebar from "./shared/layouts/Sidebar";
-import LowPriorityCard, { type LeadCard } from "./components/leads/LowPriorityCard";
+import LowPriorityCard, {
+  type LeadCard,
+} from "./components/leads/LowPriorityCard";
 import { BranchSelector } from "./components/common/BranchSelector";
 import { PrimaryButton } from "./components/common/Buttons/PrimaryButton";
 import { AddIcon } from "./utilities/icons";
 import { MoreButton } from "./components/common/Buttons/MoreButton";
 import { Metrics } from "./components/dashboard/Metrics";
+import SearchInput from "./components/common/SearchInput";
+import { Dropdown } from "./components/common/Dropdowns/Dropdown";
+import { FilterButton } from "./components/common/Buttons/FilterButton";
 
 function App() {
   const leads: LeadCard[] = [
@@ -157,21 +162,34 @@ function App() {
 
   return (
     <div className="flex min-h-screen bg-[#eef3f1]">
-      <div className="w-1/6 border-r border-[#e6e8e7] bg-white">
+      <div className="w-[250px] border-r border-[#e6e8e7] bg-white">
         <Sidebar />
       </div>
       <div className="flex w-full flex-col">
         <Header />
-       
-        <main className="flex flex-1 flex-col justify-start gap-5 px-4 py-10 lg:px-10">
+
+        <main className="flex flex-1 flex-col justify-start gap-5 lg:px-10" style={{ padding: '24px 16px 0 32px' }}>
           <div className="flex gap-2 justify-between">
-          <BranchSelector />
-          <div className="flex gap-2">
-          <PrimaryButton title="Add Lead" onClick={() => {}} icon={<AddIcon />} />
-          <MoreButton onClick={() => {}}  /> 
+            <BranchSelector />
+            <div className="flex gap-2">
+              <PrimaryButton
+                title="Add Lead"
+                onClick={() => {}}
+                icon={<AddIcon />}
+              />
+              <MoreButton onClick={() => {}} />
+            </div>
           </div>
+          <div className="flex gap-2 justify-between items-center" >
+            <div className="flex gap-2">
+              <Metrics />
+            </div>
+            <div className="flex gap-[16px]">
+              <SearchInput placeholder="Search by name or company..." />
+              <Dropdown/>
+              <FilterButton/>
+            </div>
           </div>
-          <Metrics />
           <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {leads?.map((lead: LeadCard) => (
               <LowPriorityCard key={lead.name} lead={lead} />
@@ -182,6 +200,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -1,6 +1,5 @@
 
 import { SearchIcon, NotificationIcon, SupportIcon } from "../../utilities/icons";
-import { FilterButton } from "../../components/common/Buttons/FilterButton";
 import { SegmentToggle } from "../../components/common/Toggle/SegmentToggle";
 import { useState } from "react";
   
@@ -34,7 +33,6 @@ import { useState } from "react";
   
           {/* Right Side Icons */}
           <div className="flex gap-4 items-center justify-end relative shrink-0">
-            <FilterButton/>
             <SegmentToggle value={status} onChange={setStatus} />
             {/* Notification Icon */}
             <button className="flex gap-2 items-center justify-center overflow-hidden px-4 py-2.5 relative rounded-xl shrink-0 w-11 hover:bg-gray-100 transition-colors">

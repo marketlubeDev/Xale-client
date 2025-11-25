@@ -2,14 +2,125 @@
 
 :root {
   --font-helvetica-neue: 'Helvetica Neue', sans-serif;
+  
+  /* Color Variables - Black Shades */
+  --color-black-10: #051912;
+  --color-black-8: #374741;
+  --color-black-6: #697571;
+  --color-black-5: #828c88;
+  --color-text-primary: #1e302a;
+  --color-text-secondary: #505e59;
+  --color-text-dark: #0e121b;
+  --color-text-gray: #6f6f6f;
+  
+  /* Color Variables - Status Colors */
+  --color-success: #156548;
+  --color-success-trend: #0fad14;
+  --color-error: #da2a46;
+  --color-info: #335cff;
+  --color-warning: #ff8447;
+  
+  /* Color Variables - Background */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #eef3f1;
+  --color-bg-success-light: #eff7f3;
+  --color-bg-hover: #f4f6f5;
+  --color-bg-green: #f2f7f5;
+  --color-bg-input: #f5f7f6;
+  
+  /* Color Variables - Border */
+  --color-border-primary: #e6e8e7;
+  --color-border-green: #98cdb8;
+  --color-border-divider: #b4bab8;
+  --color-border-accent: #add7c7;
+  --color-border-input: #cdd1d0;
+  
+  /* Color Variables - Badge */
+  --color-badge-info-bg: #dfe8ff;
+  --color-badge-info-text: #335cff;
+  --color-badge-warning-bg: #ffece0;
+  --color-badge-warning-text: #ff8447;
+  --color-badge-pending-bg: #ede6ff;
+  --color-badge-pending-text: #5940c3;
+  
+  /* Color Variables - Accent */
+  --color-accent-cyan: #3bd8ff;
+  --color-accent-purple: #e0ddff;
+  --color-accent-purple-dark: #4b3ca5;
 }
 
 body {
   font-family: var(--font-helvetica-neue);
 }
 
-/* Font Styles */
-.font-helvetica {
-  font-family: var(--font-helvetica-neue);
-  font-style: normal;
+
+.text-h2 {
+  font-size: 28px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -1.12px;
+}
+
+.text-h4 {
+  font-size: 24px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.72px;
+}
+
+.text-h5 {
+  font-size: 20px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.60px;
+}
+
+/* Figma Text Styles - Body */
+.text-b1 {
+  font-size: 18px;
+  line-height: auto;
+  font-weight: 400;
+  letter-spacing: -0.72px;
+}
+
+.text-b1-med {
+  font-size: 18px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.72px;
+}
+
+.text-b2 {
+  font-size: 16px;
+  line-height: auto;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+}
+
+.text-b2-med {
+  font-size: 16px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+}
+
+.text-b4 {
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: -0.56px;
+}
+
+.text-b4-med {
+  font-size: 14px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.42px;
+}
+
+.text-b5 {
+  font-size: 12px;
+  line-height: auto;
+  font-weight: 400;
+  letter-spacing: -0.24px;
 }
