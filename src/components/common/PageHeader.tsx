@@ -10,7 +10,7 @@ export function PageHeader({
   className = '',
 }: PageHeaderProps) {
   return (
-    <div className={`flex justify-between items-start ${className}`}>
+    <div className={`flex justify-between items-start pb-5 border-b border-[var(--color-border-input)] ${className}`}>
     
       <div className="flex-shrink-0">
         {leftContent}
