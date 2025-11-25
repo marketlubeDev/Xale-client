@@ -28,6 +28,7 @@ import ToggleItem from "../components/common/ToggleItem";
 import FormSelector from "../components/common/FormSelector";
 import IconButton from "../components/common/IconButton";
 import IconButtonGrid from "../components/common/IconButtonGrid";
+import StatusCard from "../components/status/StatusCard";
 
 function Addstage() {
   const stageCapabilities = [
@@ -123,6 +124,31 @@ function Addstage() {
                     />
                   ))}
                 </ToggleCardGroup>
+              </FormSection>
+
+              <FormSection title="Status Marks">
+                <StatusCard
+                  statusTitle="Status 1"
+                  statusName="Status 1 Name"
+                  subStatuses={[
+                    { id: 1, name: "Sub Status 1" },
+                  ]}
+                  onStatusNameChange={() => {}}
+                  onSubStatusNameChange={() => {}}
+                  onDeleteStatus={() => {}}
+                  onDeleteSubStatus={() => {}}
+                />
+                <StatusCard
+                  statusTitle="Status 1"
+                  statusName="Status 1 Name"
+                  subStatuses={[
+                    { id: 1, name: "Sub Status 1" },
+                  ]}
+                  onStatusNameChange={() => {}}
+                  onSubStatusNameChange={() => {}}
+                  onDeleteStatus={() => {}}
+                  onDeleteSubStatus={() => {}}
+                />
               </FormSection>
 
               <FormSection

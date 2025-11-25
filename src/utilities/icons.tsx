@@ -745,6 +745,108 @@ export function TrendDownIcon({
 
 //........................................................Add stage Icons..............................................................
 
+export function DragIcon({
+  color = "var(--color-black-7)",
+  size = 24,
+  className,
+}: IconProps): React.ReactElement {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M9 6C9 6.82843 8.32843 7.5 7.5 7.5C6.67157 7.5 6 6.82843 6 6C6 5.17157 6.67157 4.5 7.5 4.5C8.32843 4.5 9 5.17157 9 6Z"
+        fill={color}
+      />
+      <path
+        d="M9 12C9 12.8284 8.32843 13.5 7.5 13.5C6.67157 13.5 6 12.8284 6 12C6 11.1716 6.67157 10.5 7.5 10.5C8.32843 10.5 9 11.1716 9 12Z"
+        fill={color}
+      />
+      <path
+        d="M7.5 19.5C8.32843 19.5 9 18.8284 9 18C9 17.1716 8.32843 16.5 7.5 16.5C6.67157 16.5 6 17.1716 6 18C6 18.8284 6.67157 19.5 7.5 19.5Z"
+        fill={color}
+      />
+      <path
+        d="M18 6C18 6.82843 17.3284 7.5 16.5 7.5C15.6716 7.5 15 6.82843 15 6C15 5.17157 15.6716 4.5 16.5 4.5C17.3284 4.5 18 5.17157 18 6Z"
+        fill={color}
+      />
+      <path
+        d="M16.5 13.5C17.3284 13.5 18 12.8284 18 12C18 11.1716 17.3284 10.5 16.5 10.5C15.6716 10.5 15 11.1716 15 12C15 12.8284 15.6716 13.5 16.5 13.5Z"
+        fill={color}
+      />
+      <path
+        d="M18 18C18 18.8284 17.3284 19.5 16.5 19.5C15.6716 19.5 15 18.8284 15 18C15 17.1716 15.6716 16.5 16.5 16.5C17.3284 16.5 18 17.1716 18 18Z"
+        fill={color}
+      />
+    </svg>
+  );
+}
 
+export function DeleteIcon({
+  color = "var(--color-error)",
+  size = 18,
+  className,
+}: IconProps): React.ReactElement {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 16 18"
+      fill="none"
+    >
+      <path
+        d="M13.8333 4.08333C11.6833 3.86667 9.51667 3.75 7.35833 3.75C6 3.75 4.64167 3.81667 3.28333 3.95L2.16667 4.08333M5.66667 3.39167L5.81667 2.525C5.925 1.89167 6 1.41667 7.10833 1.41667H8.89167C10 1.41667 10.0833 1.91667 10.1833 2.53333L10.3333 3.39167M12.5667 6.84167L12.1333 14.3083C12.0667 15.5833 12 16.5833 9.89167 16.5833H6.10833C4 16.5833 3.93333 15.5833 3.86667 14.3083L3.43333 6.84167M6.88333 12.4167H9.10833M6.33333 9.41667H9.66667"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
- 
+export function InfoIcon({
+  color = "var(--color-black-4)",
+  size = 16,
+  className,
+}: IconProps): React.ReactElement {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <path
+        d="M8 14.6666C11.6819 14.6666 14.6667 11.6819 14.6667 7.99998C14.6667 4.31808 11.6819 1.33331 8 1.33331C4.3181 1.33331 1.33333 4.31808 1.33333 7.99998C1.33333 11.6819 4.3181 14.6666 8 14.6666Z"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 5.33331V8.66665"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.99634 10.6667H8.00233"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
