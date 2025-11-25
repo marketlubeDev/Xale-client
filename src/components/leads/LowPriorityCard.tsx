@@ -1,5 +1,5 @@
 import React from "react";
-import { MailIcon } from "../../utilities/icons";
+import { LocationIcon, MailIcon, PhoneIcon } from "../../utilities/icons";
 
 type BadgeTone = "info" | "warning" | "pending" | "neutral";
 
@@ -36,13 +36,7 @@ const BADGE_STYLES: Record<BadgeTone, string> = {
   neutral: "bg-[#e8f0ec] text-[#1e302a]",
 };
 
-const iconProps = {
-  stroke: "#1E302A",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  fill: "none" as const,
-};
+
 
 export function LowPriorityCard({
   lead,
@@ -108,7 +102,7 @@ export function LowPriorityCard({
             key={`${name}-${badge.label}`}
             className={`rounded-full px-3 py-1 text-[12px] font-medium ${BADGE_STYLES[badge.tone]}`}
           >
-            {badge.label}
+            {badge?.label}
           </span>
         ))}
         <div className="ml-auto flex h-7 w-7 items-center justify-center rounded-full bg-[#e0ddff] text-[12px] font-medium text-[#4b3ca5]">
@@ -121,23 +115,9 @@ export function LowPriorityCard({
 
 
 
-function PhoneIcon(): React.ReactElement {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" {...iconProps}>
-      <path d="M6.5 2.5H11.5L12.5 4.5V13.5L11.5 15.5H6.5L5.5 13.5V4.5L6.5 2.5Z" />
-      <path d="M8.25 12.75H9.75" />
-    </svg>
-  );
-}
 
-function LocationIcon(): React.ReactElement {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" {...iconProps}>
-      <path d="M9 16C11.5 13.3333 13 10.8333 13 8.5C13 6.01472 11.2091 4 9 4C6.79086 4 5 6.01472 5 8.5C5 10.8333 6.5 13.3333 9 16Z" />
-      <path d="M9 9.25C9.69036 9.25 10.25 8.69036 10.25 8C10.25 7.30964 9.69036 6.75 9 6.75C8.30964 6.75 7.75 7.30964 7.75 8C7.75 8.69036 8.30964 9.25 9 9.25Z" />
-    </svg>
-  );
-}
+
+
 
 export default LowPriorityCard;
 

@@ -1,6 +1,11 @@
 import Header from "./shared/layouts/Header";
 import Sidebar from "./shared/layouts/Sidebar";
 import LowPriorityCard, { type LeadCard } from "./components/leads/LowPriorityCard";
+import { BranchSelector } from "./components/common/BranchSelector";
+import { PrimaryButton } from "./components/common/Buttons/PrimaryButton";
+import { AddIcon } from "./utilities/icons";
+import { MoreButton } from "./components/common/Buttons/MoreButton";
+import { Metrics } from "./components/dashboard/Metrics";
 
 function App() {
   const leads: LeadCard[] = [
@@ -100,6 +105,54 @@ function App() {
         { label: "Waiting", tone: "warning" },
       ],
     },
+    {
+      name: "Emily Johnson",
+      role: "Social research",
+      campaign: "April Campaign",
+      timestamp: "24 Sep, 03:15 pm",
+      stage: "Visa",
+      email: "emilyjohnson@gmail.com",
+      phone: "+91 98675 34281",
+      city: "Bangalore",
+      avatarInitials: "EJ",
+      reviewerInitial: "M",
+      badges: [
+        { label: "Verified", tone: "info" },
+        { label: "Waiting", tone: "warning" },
+      ],
+    },
+    {
+      name: "Aaron Smith",
+      role: "Retail newsletter",
+      campaign: "May Promotions",
+      timestamp: "25 Sep, 10:02 am",
+      stage: "Leads",
+      email: "aaronsmith@wecarple.com",
+      phone: "+91 98705 42810",
+      city: "Delhi",
+      avatarInitials: "AS",
+      reviewerInitial: "M",
+      badges: [
+        { label: "Verified", tone: "info" },
+        { label: "In Progress", tone: "warning" },
+      ],
+    },
+    {
+      name: "Sophia Green",
+      role: "Sales team",
+      campaign: "December Sales",
+      timestamp: "02 Oct, 06:09 pm",
+      stage: "Visa",
+      email: "sophiagreen@bravo.com",
+      phone: "+91 21086 78643",
+      city: "Jaipur",
+      avatarInitials: "SG",
+      reviewerInitial: "M",
+      badges: [
+        { label: "Pending", tone: "pending" },
+        { label: "In Progress", tone: "warning" },
+      ],
+    },
   ];
 
   return (
@@ -109,9 +162,18 @@ function App() {
       </div>
       <div className="flex w-full flex-col">
         <Header />
-        <main className="flex flex-1 items-start justify-center px-4 py-10 lg:px-10">
+       
+        <main className="flex flex-1 flex-col justify-start gap-5 px-4 py-10 lg:px-10">
+          <div className="flex gap-2 justify-between">
+          <BranchSelector />
+          <div className="flex gap-2">
+          <PrimaryButton title="Add Lead" onClick={() => {}} icon={<AddIcon />} />
+          <MoreButton onClick={() => {}}  /> 
+          </div>
+          </div>
+          <Metrics />
           <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {leads.map((lead) => (
+            {leads?.map((lead: LeadCard) => (
               <LowPriorityCard key={lead.name} lead={lead} />
             ))}
           </div>
@@ -120,5 +182,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

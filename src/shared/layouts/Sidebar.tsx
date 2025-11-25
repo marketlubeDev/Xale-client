@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import XaleLogoImage from '../../assets/sidebar/xaleLogo.svg';
-import { ApplicationIcon, DashboardIcon, LeadsIcon, RotateArrowIcon, StageManagementIcon, VisaIcon ,AddIcon } from '../../utilities/icons';
-import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
+import { ApplicationIcon, DashboardIcon, LeadsIcon, RotateArrowIcon, StageManagementIcon, VisaIcon } from '../../utilities/icons';
 import { Dropdown } from '../../components/common/Dropdowns/Dropdown';
 import SideBarItem from '../../components/sidebar/SideBarItem';
 
@@ -120,8 +119,6 @@ export default function Sidebar() {
             </>
           )}
         </div>
-
-        <PrimaryButton title="Add Lead" onClick={() => {}} icon={<AddIcon />} />
 
         <Dropdown />
       </div>

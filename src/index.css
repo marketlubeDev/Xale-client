@@ -7,3 +7,9 @@
 body {
   font-family: var(--font-helvetica-neue);
 }
+
+/* Font Styles */
+.font-helvetica {
+  font-family: var(--font-helvetica-neue);
+  font-style: normal;
+}
