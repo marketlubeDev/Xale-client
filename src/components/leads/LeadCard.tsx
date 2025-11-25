@@ -18,7 +18,7 @@ export type LeadCard = {
   
 };
 
-export type LowPriorityCardProps = {
+export type LeadCardProps = {
   lead: LeadCard;
 };
 
@@ -38,9 +38,9 @@ const BADGE_STYLES: Record<BadgeTone, string> = {
 
 
 
-export function LowPriorityCard({
+export function LeadCard({
   lead,
-}: LowPriorityCardProps): React.ReactElement {
+}: LeadCardProps): React.ReactElement {
   const {
     name,
     role,
@@ -119,5 +119,5 @@ export function LowPriorityCard({
 
 
 
-export default LowPriorityCard;
+export default LeadCard;
 

@@ -41,7 +41,7 @@ export function ViewSwitcher({
               className="flex gap-[8px] items-center justify-center px-[24px] py-[8px] transition-opacity hover:opacity-70"
             >
               <div className="shrink-0 size-[20px]">
-                {React.cloneElement(option.icon, {
+                {React.cloneElement(option.icon as React.ReactElement<{ color?: string; size?: number }>, {
                   color: isActive
                     ? "var(--color-black-10)"
                     : "var(--color-black-8)",
