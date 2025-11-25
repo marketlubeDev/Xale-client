@@ -31,7 +31,7 @@ export function Toggle({
         backgroundColor: checked ? 'var(--color-toggle-active)' : 'var(--color-toggle-inactive)',
       }}
     >
-      {/* Toggle Circle */}
+
       <div
         className="absolute top-[4px] h-[12px] w-[12px] bg-white rounded-full transition-all"
         style={{
