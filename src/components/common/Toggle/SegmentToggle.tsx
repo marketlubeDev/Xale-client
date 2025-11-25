@@ -39,7 +39,7 @@ export function SegmentToggle({
   const resolvedValue = value ?? options[0]?.value;
 
   return (
-    <div className={`inline-flex rounded-[14px] bg-white p-[2px] ${className}`}>
+    <div className={`inline-flex rounded-[14px] p-[2px] items-center ${className}`}>
       {options?.map((option) => {
         const isActive = option.value === resolvedValue;
 

@@ -1,12 +1,10 @@
 
 import { SearchIcon, NotificationIcon, SupportIcon } from "../../utilities/icons";
-import { SegmentToggle } from "../../components/common/Toggle/SegmentToggle";
-import { useState } from "react";
+
   
 
   
   export default function Header() {
-    const [status, setStatus] = useState<string>("active");
     return (
       <div className="bg-white border-b border-[#e6e8e7] relative w-full">
         <div className="flex gap-5 items-center justify-end pl-5 pr-10 py-4 relative w-full">
@@ -33,7 +31,6 @@ import { useState } from "react";
   
           {/* Right Side Icons */}
           <div className="flex gap-4 items-center justify-end relative shrink-0">
-            <SegmentToggle value={status} onChange={setStatus} />
             {/* Notification Icon */}
             <button className="flex gap-2 items-center justify-center overflow-hidden px-4 py-2.5 relative rounded-xl shrink-0 w-11 hover:bg-gray-100 transition-colors">
               <div className="relative shrink-0 w-6 h-6">

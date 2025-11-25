@@ -11,8 +11,13 @@ import { Metrics } from "./components/dashboard/Metrics";
 import SearchInput from "./components/common/SearchInput";
 import { Dropdown } from "./components/common/Dropdowns/Dropdown";
 import { FilterButton } from "./components/common/Buttons/FilterButton";
+import { ViewSwitcher } from "./components/common/ViewSwitcher";
+import { SegmentToggle } from "./components/common/Toggle/SegmentToggle";
+import { useState } from "react";
 
 function App() {
+  const [status, setStatus] = useState<string>("active");
+
   const leads: LeadCard[] = [
     {
       name: "Emily Johnson",
@@ -168,26 +173,38 @@ function App() {
       <div className="flex w-full flex-col">
         <Header />
 
-        <main className="flex flex-1 flex-col justify-start gap-5 lg:px-10" style={{ padding: '24px 16px 0 32px' }}>
-          <div className="flex gap-2 justify-between">
-            <BranchSelector />
-            <div className="flex gap-2">
-              <PrimaryButton
-                title="Add Lead"
-                onClick={() => {}}
-                icon={<AddIcon />}
-              />
-              <MoreButton onClick={() => {}} />
+        <main
+          className="flex flex-1 flex-col justify-start gap-5 lg:px-10"
+          style={{ padding: "24px 16px 0 32px" }}
+        >
+          <div className="flex flex-col gap-5">
+            <div className="flex gap-2 justify-between">
+              <BranchSelector />
+              <div className="flex gap-2">
+                <PrimaryButton
+                  title="Add Lead"
+                  onClick={() => {}}
+                  icon={<AddIcon />}
+                />
+                <MoreButton onClick={() => {}} />
+              </div>
             </div>
-          </div>
-          <div className="flex gap-2 justify-between items-center" >
-            <div className="flex gap-2">
-              <Metrics />
+            <div className="flex gap-2 justify-between items-center">
+              <div className="flex gap-2">
+                <Metrics />
+              </div>
+              <div className="flex gap-[16px]">
+                <SearchInput placeholder="Search by name or company..." />
+                <Dropdown />
+                <FilterButton />
+              </div>
             </div>
-            <div className="flex gap-[16px]">
-              <SearchInput placeholder="Search by name or company..." />
-              <Dropdown/>
-              <FilterButton/>
+            <div className="flex gap-2 justify-between items-center">
+              <ViewSwitcher activeView="grid" />
+              <div className="flex gap-2">
+                <SegmentToggle value={status} onChange={setStatus} />
+                <MoreButton onClick={() => {}} />
+              </div>
             </div>
           </div>
           <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
