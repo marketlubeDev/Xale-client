@@ -22,7 +22,7 @@ export function FormTextArea({
   return (
     <div className={`flex flex-col gap-[6px] items-start ${className}`}>
 
-      <label className="text-b4-med text-[var(--color-text-primary)] text-center tracking-[-0.56px] whitespace-pre shrink-0 font-['Helvetica Neue']">
+      <label className="text-b4-med text-[var(--color-text-primary)] text-center tracking-[-0.56px] whitespace-pre shrink-0">
         {label}
         {required && <span className="text-[var(--color-error)] ml-1">*</span>}
       </label>

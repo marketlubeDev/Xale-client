@@ -21,16 +21,143 @@ import {
   GridIcon,
   ListIcon,
   BoardIcon,
+  AddIcon,
 } from "../utilities/icons";
 import ToggleCardGroup from "../components/common/ToggleCardGroup";
 
 import ToggleItem from "../components/common/ToggleItem";
 import FormSelector from "../components/common/FormSelector";
+import type { NestedSelectOption } from "../components/common/FormSelector";
 import IconButton from "../components/common/IconButton";
 import IconButtonGrid from "../components/common/IconButtonGrid";
 import StatusCard from "../components/status/StatusCard";
+import { DashedButton } from "../components/common/Buttons/DashedButton";
+import { useState } from "react";
 
 function Addstage() {
+  // Dummy data with 3-level nested options
+  const nestedStatusOptions: NestedSelectOption[] = [
+    {
+      value: "qualifying",
+      label: "Qualifying Status",
+      color: "#335cff", // Blue
+      children: [
+        {
+          value: "followup",
+          label: "Followup",
+          color: "#335cff", // Blue
+          children: [
+            {
+              value: "followup-initial",
+              label: "Initial Followup",
+              color: "#3bd8ff", // Cyan
+            },
+            {
+              value: "followup-secondary",
+              label: "Secondary Followup",
+              color: "#0fad14", // Green
+            },
+            {
+              value: "followup-final",
+              label: "Final Followup",
+              color: "#5940c3", // Purple
+            },
+          ],
+        },
+        {
+          value: "pending",
+          label: "Pending Decision",
+          color: "#ff8447", // Orange
+          children: [
+            {
+              value: "pending-review",
+              label: "Pending Review",
+              color: "#ff8447", // Orange
+            },
+            {
+              value: "pending-approval",
+              label: "Pending Approval",
+              color: "#da2a46", // Red
+            },
+          ],
+        },
+        {
+          value: "active",
+          label: "Active",
+          color: "#0fad14", // Green
+        },
+      ],
+    },
+    {
+      value: "rejection",
+      label: "Rejection Status",
+      color: "#da2a46", // Red
+      children: [
+        {
+          value: "rejected-qualification",
+          label: "Rejected - Qualification",
+          color: "#da2a46", // Red
+          children: [
+            {
+              value: "rejected-income",
+              label: "Income Not Met",
+              color: "#da2a46", // Red
+            },
+            {
+              value: "rejected-credit",
+              label: "Credit Score Low",
+              color: "#ff8447", // Orange
+            },
+          ],
+        },
+        {
+          value: "rejected-documentation",
+          label: "Rejected - Documentation",
+          color: "#ff8447", // Orange
+        },
+        {
+          value: "rejected-other",
+          label: "Rejected - Other",
+          color: "#5940c3", // Purple
+        },
+      ],
+    },
+    {
+      value: "rollback",
+      label: "Rollback Status",
+      color: "#5940c3", // Purple
+      children: [
+        {
+          value: "rollback-stage1",
+          label: "Rollback to Stage 1",
+          color: "#335cff", // Blue
+          children: [
+            {
+              value: "rollback-stage1-sub1",
+              label: "Stage 1 - Sub Status 1",
+              color: "#335cff", // Blue
+            },
+            {
+              value: "rollback-stage1-sub2",
+              label: "Stage 1 - Sub Status 2",
+              color: "#3bd8ff", // Cyan
+            },
+          ],
+        },
+        {
+          value: "rollback-stage2",
+          label: "Rollback to Stage 2",
+          color: "#0fad14", // Green
+        },
+      ],
+    },
+  ];
+
+  // State for form values
+  const [qualifyingStatus, setQualifyingStatus] = useState<string>("");
+  const [rejectionStatus, setRejectionStatus] = useState<string>("");
+  const [rollbackStatus, setRollbackStatus] = useState<string[]>([]);
+  const [defaultQualifyingStatus, setDefaultQualifyingStatus] = useState<string>("");
   const stageCapabilities = [
     {
       id: 1,
@@ -149,6 +276,7 @@ function Addstage() {
                   onDeleteStatus={() => {}}
                   onDeleteSubStatus={() => {}}
                 />
+                <DashedButton label="Add Status" icon={<AddIcon />} onClick={() => {}} backgroundColor="var(--color-border-card-active)" />
               </FormSection>
 
               <FormSection
@@ -192,47 +320,41 @@ function Addstage() {
 
               <FormSection title="Status Marks">
                 <FormSelector
-                  label="Default Qualifying status *"
-                  placeholder="Select Status Marks"
-                  options={[
-                    { value: "1", label: "Choose qualifying sub status" },
-                    { value: "2", label: "Failure" },
-                    { value: "3", label: "Pending" },
-                  ]}
-                  value="1"
+                  label="Qualifying status"
+                  placeholder="Choose qualifying sub status"
+                  options={nestedStatusOptions}
+                  value={qualifyingStatus}
+                  onChange={(value) => setQualifyingStatus(value as string)}
+                  required
+                  showInfoIcon
+                />
+
+                <FormSelector
+                  label="Default Qualifying status"
+                  placeholder="Choose qualifying sub status"
+                  options={nestedStatusOptions}
+                  value={defaultQualifyingStatus}
+                  onChange={(value) => setDefaultQualifyingStatus(value as string)}
+                  required
                 />
 
                 <FormSelector
                   label="Rejection status"
-                  placeholder="Select Status Marks"
-                  options={[
-                    { value: "1", label: "Choose qualifying sub status" },
-                    { value: "2", label: "Failure" },
-                    { value: "3", label: "Pending" },
-                  ]}
-                  value="1"
+                  placeholder="Choose rejection status"
+                  options={nestedStatusOptions}
+                  value={rejectionStatus}
+                  onChange={(value) => setRejectionStatus(value as string)}
+                  required
+                  showInfoIcon
                 />
 
                 <FormSelector
                   label="Default Rollback Status/Sub-status"
                   placeholder="Select Status Marks"
-                  options={[
-                    { value: "1", label: "Choose qualifying sub status" },
-                    { value: "2", label: "Failure" },
-                    { value: "3", label: "Pending" },
-                  ]}
-                  value="1"
-                />
-
-                <FormSelector
-                  label="Qualifying status"
-                  placeholder="Select Status Marks"
-                  options={[
-                    { value: "1", label: "Choose qualifying sub status" },
-                    { value: "2", label: "Failure" },
-                    { value: "3", label: "Pending" },
-                  ]}
-                  value="1"
+                  options={nestedStatusOptions}
+                  value={rollbackStatus}
+                  onChange={(value) => setRollbackStatus(value as string[])}
+                  multiSelect={true}
                 />
               </FormSection>
 

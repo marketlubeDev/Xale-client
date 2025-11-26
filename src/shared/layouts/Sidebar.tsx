@@ -14,15 +14,15 @@ export default function Sidebar() {
       {/* Header Section - User Profile */}
       <div className="border-b border-[#e6e8e7] flex gap-2 items-center px-8 py-4 relative w-full h-[80px]">
         <div className="flex gap-2 items-center relative shrink-0">
-        <div className="relative shrink-0 w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[#051912] to-[#0a2e24] flex items-center justify-center">
+        <div className="relative shrink-0 w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[var(--color-black-10)] to-[var(--color-black-8)] flex items-center justify-center">
         <img src={XaleLogoImage} alt="Xale Logo" className="w-[40px] h-[40px]" />
         </div>
           <div className="flex flex-col gap-1 items-start justify-center relative shrink-0">
             <div className="flex items-center justify-between not-italic relative shrink-0 te">
-              <div className="flex flex-col h-6 justify-end leading-none relative shrink-0 text-[#051912] text-lg tracking-[-0.72px] w-[21px]">
+              <div className="flex flex-col h-6 justify-end leading-none relative shrink-0 text-[var(--color-black-8)] text-lg tracking-[-0.72px] w-[21px]">
                 <p className="leading-normal">Hi,</p>
               </div>
-              <p className="font-medium leading-normal relative shrink-0 text-lg whitespace-nowrap tracking-[-0.8px] text-[#051912]">
+              <p className="font-medium leading-normal relative shrink-0 text-lg whitespace-nowrap tracking-[-0.8px] text-[var(--color-black-8)]">
                 Sarah Johnson
               </p>
             </div>
@@ -38,7 +38,7 @@ export default function Sidebar() {
       {/* Navigation Section */}
       <div className="relative flex flex-col gap-1 items-start w-full flex-1 overflow-y-auto" style={{ padding: '24px 16px 0 32px' }}>
         {/* Active indicator bar */}
-        <div className="absolute h-10 left-0.5 rounded-br-[20px] rounded-tr-[20px] top-[106px] w-2 bg-[#051912]" />
+        <div className="absolute h-10 left-0.5 rounded-br-[20px] rounded-tr-[20px] top-[106px] w-2 bg-[var(--color-black-8)]" />
         
         {/* Dashboard Nav Item */}
         <SideBarItem text="Dashboard" icon={<DashboardIcon />} />
@@ -67,7 +67,7 @@ export default function Sidebar() {
                 <div className="flex gap-2 items-center justify-center p-0.5 relative shrink-0 w-5 h-5">
                   <LeadsIcon />
                 </div>
-                <p className="text-b2-med relative shrink-0 whitespace-nowrap text-[#051912]">
+                <p className="text-b2 relative shrink-0 whitespace-nowrap text-[var(--color-black-8)]">
                   Leads
                 </p>
               </div>
@@ -77,7 +77,7 @@ export default function Sidebar() {
                 <div className="shrink-0 w-5 h-5">
                   <ApplicationIcon />
                 </div>
-                <p className="text-b2-med relative shrink-0 text-[#505e59] whitespace-nowrap">
+                <p className="text-b2 relative shrink-0 text-[var(--color-black-8)] whitespace-nowrap">
                   Application
                 </p>
               </div>
@@ -87,7 +87,7 @@ export default function Sidebar() {
                 <div className="shrink-0 w-5 h-5">
                   <VisaIcon />
                 </div>
-                <p className="text-b2-med relative shrink-0 text-[#374741] whitespace-nowrap">
+                <p className="text-b2  relative shrink-0 text-[var(--color-black-8)] whitespace-nowrap">
                   Visa
                 </p>
               </div>

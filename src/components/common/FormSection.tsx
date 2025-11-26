@@ -28,7 +28,7 @@ export function FormSection({
         )}
       </div>
 
-      <div className="flex flex-col gap-[16px] items-stretch pb-[8px] pt-0 px-[8px] w-full">
+      <div className="flex flex-col gap-[16px] items-stretch pb-[8px] pt-0  w-full">
         {children}
       </div>
     </div>

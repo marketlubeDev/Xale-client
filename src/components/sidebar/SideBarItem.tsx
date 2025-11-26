@@ -22,7 +22,7 @@ function SideBarItem({
     >
       <div className="shrink-0 w-5 h-5">{icon}</div>
       <p
-        className={`text-b2-med relative shrink-0 whitespace-nowrap ${
+        className={`text-b2 relative shrink-0 whitespace-nowrap ${
           isActive ? "text-[#051912]" : "text-[#505e59]"
         }`}
       >
