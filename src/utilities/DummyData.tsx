@@ -1,5 +1,4 @@
-import type { ReactNode } from "react";
-import type { NestedSelectOption } from "../components/common/FormSelector";
+ 
 import {
   MailIcon,
   PhoneIcon,
@@ -15,8 +14,7 @@ import {
   BoardIcon,
 } from "./icons";
 
-// Nested Status Options with 3-level hierarchy
-export const nestedStatusOptions: NestedSelectOption[] = [
+export const nestedStatusOptions = [
   {
     value: "qualifying",
     label: "Qualifying Status",
@@ -133,58 +131,204 @@ export const nestedStatusOptions: NestedSelectOption[] = [
   },
 ];
 
-// Stage Capabilities Data
-export interface StageCapability {
-  id: number;
-  title: string;
-  description: string;
-  checked: boolean;
-  icon: ReactNode;
-}
-
-export const stageCapabilities: StageCapability[] = [
+// Stage Capabilities Configuration (Replace onChange handlers during integration)
+export const stageCapabilities = [
   {
     id: 1,
-    title: "Stage Visible",
-    description: "Whether the stage is visible to the user",
-    checked: true,
-    icon: <MailIcon color="white" />,
+    config: {
+      title: "Stage Visible",
+      description: "Whether the stage is visible to the user",
+      checked: true,
+      icon: <MailIcon color="white" />,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
   },
   {
     id: 2,
-    title: "Stage Visible",
-    description: "Whether the stage is visible to the user",
-    checked: true,
-    icon: <MailIcon color="white" />,
+    config: {
+      title: "Stage Visible",
+      description: "Whether the stage is visible to the user",
+      checked: true,
+      icon: <MailIcon color="white" />,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
   },
   {
     id: 3,
-    title: "Stage Visible",
-    description: "Whether the stage is visible to the user",
-    checked: true,
-    icon: <MailIcon color="white" />,
+    config: {
+      title: "Stage Visible",
+      description: "Whether the stage is visible to the user",
+      checked: true,
+      icon: <MailIcon color="white" />,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
   },
 ];
 
-// Stage Icons Data
-export interface StageIcon {
-  id: number;
-  icon: ReactNode;
-  active: boolean;
-}
 
-export const stageIcons: StageIcon[] = [
-  { id: 1, icon: <MailIcon />, active: false },
-  { id: 2, icon: <PhoneIcon />, active: true },
-  { id: 3, icon: <LocationIcon />, active: false },
-  { id: 4, icon: <DashboardIcon />, active: false },
-  { id: 5, icon: <LeadsIcon />, active: false },
-  { id: 6, icon: <ApplicationIcon />, active: false },
-  { id: 7, icon: <VisaIcon />, active: false },
-  { id: 8, icon: <StageManagementIcon />, active: false },
-  { id: 9, icon: <FilterIcon />, active: false },
-  { id: 10, icon: <GridIcon />, active: false },
-  { id: 11, icon: <ListIcon />, active: false },
-  { id: 12, icon: <BoardIcon />, active: false },
+// Stage Icons Configuration (Replace onClick handlers during integration)
+export const stageIcons = [
+  { id: 1, config: { icon: <MailIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 2, config: { icon: <PhoneIcon />, active: true, onClick: () => {} } }, // TODO: Replace handler
+  { id: 3, config: { icon: <LocationIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 4, config: { icon: <DashboardIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 5, config: { icon: <LeadsIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 6, config: { icon: <ApplicationIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 7, config: { icon: <VisaIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 8, config: { icon: <StageManagementIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 9, config: { icon: <FilterIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 10, config: { icon: <GridIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 11, config: { icon: <ListIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+  { id: 12, config: { icon: <BoardIcon />, active: false, onClick: () => {} } }, // TODO: Replace handler
+];
+
+
+
+// Status Cards Configuration (Replace handlers during integration)
+export const statusCardsData = [
+  {
+    id: 1,
+    config: {
+      statusTitle: "Status 1",
+      statusName: "Status 1 Name",
+      subStatuses: [{ id: 1, name: "Sub Status 1" }],
+      onStatusNameChange: () => {}, // TODO: Replace with actual handler
+      onSubStatusNameChange: () => {}, // TODO: Replace with actual handler
+      onDeleteStatus: () => {}, // TODO: Replace with actual handler
+      onDeleteSubStatus: () => {}, // TODO: Replace with actual handler
+    },
+  },
+  {
+    id: 2,
+    config: {
+      statusTitle: "Status 2",
+      statusName: "Status 2 Name",
+      subStatuses: [{ id: 1, name: "Sub Status 1" }],
+      onStatusNameChange: () => {}, // TODO: Replace with actual handler
+      onSubStatusNameChange: () => {}, // TODO: Replace with actual handler
+      onDeleteStatus: () => {}, // TODO: Replace with actual handler
+      onDeleteSubStatus: () => {}, // TODO: Replace with actual handler
+    },
+  },
+];
+
+
+
+// Choice Toggles Configuration (Replace onChange handlers during integration)
+export const choiceToggles = [
+  {
+    id: "allow-custom-name",
+    config: {
+      title: "Allow Custom Name",
+      description: "Let users rename a choices when creating it for a lead",
+      checked: true,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
+  },
+  {
+    id: "auto-pause",
+    config: {
+      title: "Auto Pause Other Choices",
+      description: "Pauses other choices when one qualifies",
+      checked: false,
+      disabled: true,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
+  },
+];
+
+// Visibility Toggles Configuration (Replace onChange handlers during integration)
+export const visibilityToggles = [
+  {
+    id: "show-profile-1",
+    config: {
+      title: "Show in Leads profile/drawer",
+      description: "Let users rename a choices when creating it for a lead",
+      checked: true,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
+  },
+  {
+    id: "show-profile-2",
+    config: {
+      title: "Show in Leads profile/drawer",
+      description: "Let users rename a choices when creating it for a lead",
+      checked: true,
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
+  },
+];
+
+// Form Input Configurations (Replace onChange handlers during integration)
+export const basicDetailsInputs = [
+  {
+    id: "stage-name",
+    config: {
+      label: "Stage Name",
+      placeholder: "Enter Stage Name",
+      onChange: () => {}, // TODO: Replace with actual handler
+    },
+  },
+];
+
+export const stageOrderInput = {
+  id: "stage-order",
+  config: {
+    label: "Stage Name",
+    placeholder: "",
+    value: "1",
+    type: "number" as const,
+    onChange: () => {}, // TODO: Replace with actual handler
+  },
+};
+
+export const stageActionsInput = {
+  id: "stage-actions",
+  config: {
+    label: "Stage Actions",
+    placeholder: "Select Stage Actions",
+    value: "1",
+    type: "number" as const,
+    onChange: () => {}, // TODO: Replace with actual handler
+  },
+};
+
+// DashedButton Configuration
+export const addStatusButton = {
+  config: {
+    label: "Add Status",
+    icon: null, // Will be added in component
+    onClick: () => {}, // TODO: Replace with actual handler
+    backgroundColor: "var(--color-border-card-active)",
+  },
+};
+
+// Form Selector Configuration (Will be dynamically populated with handlers)
+export const statusFormSelectors = [
+  {
+    id: "qualifying-status",
+    label: "Qualifying status",
+    placeholder: "Choose qualifying sub status",
+    required: true,
+    showInfoIcon: true,
+  },
+  {
+    id: "default-qualifying-status",
+    label: "Default Qualifying status",
+    placeholder: "Choose qualifying sub status",
+    required: true,
+  },
+  {
+    id: "rejection-status",
+    label: "Rejection status",
+    placeholder: "Choose rejection status",
+    required: true,
+    showInfoIcon: true,
+  },
+  {
+    id: "rollback-status",
+    label: "Default Rollback Status/Sub-status",
+    placeholder: "Select Status Marks",
+  },
 ];
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface DashedButtonProps {
+interface DashedButtonConfig {
   label: string;
   icon?: React.ReactNode;
   onClick?: () => void;
@@ -13,18 +13,23 @@ interface DashedButtonProps {
   fullWidth?: boolean;
 }
 
-export function DashedButton({
-  label,
-  icon,
-  onClick,
-  backgroundColor,
-  borderColor = '#5aaf8e',
-  textColor = 'var(--color-black-10)',
-  iconColor = 'var(--color-black-10)',
-  className = '',
-  disabled = false,
-  fullWidth = true,
-}: DashedButtonProps) {
+interface DashedButtonProps {
+  config: DashedButtonConfig;
+}
+
+export function DashedButton({ config }: DashedButtonProps) {
+  const {
+    label,
+    icon,
+    onClick,
+    backgroundColor,
+    borderColor = '#5aaf8e',
+    textColor = 'var(--color-black-10)',
+    iconColor = 'var(--color-black-10)',
+    className = '',
+    disabled = false,
+    fullWidth = true,
+  } = config;
   return (
     <button
       onClick={onClick}

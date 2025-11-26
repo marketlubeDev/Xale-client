@@ -16,14 +16,50 @@ import IconButtonGrid from "../components/common/IconButtonGrid";
 import StatusCard from "../components/status/StatusCard";
 import { DashedButton } from "../components/common/Buttons/DashedButton";
 import { useState } from "react";
-import { nestedStatusOptions, stageCapabilities, stageIcons } from "../utilities/DummyData";
+import { 
+  nestedStatusOptions, 
+  stageCapabilities, 
+  stageIcons,
+  statusCardsData,
+  choiceToggles,
+  visibilityToggles,
+  statusFormSelectors,
+  basicDetailsInputs,
+  stageOrderInput,
+  stageActionsInput,
+  addStatusButton,
+} from "../utilities/DummyData";
 
 function Addstage() {
-
+  // Form state
   const [qualifyingStatus, setQualifyingStatus] = useState<string>("");
   const [rejectionStatus, setRejectionStatus] = useState<string>("");
   const [rollbackStatus, setRollbackStatus] = useState<string[]>([]);
   const [defaultQualifyingStatus, setDefaultQualifyingStatus] = useState<string>("");
+
+  // Handler mapping for form selectors
+  const statusHandlers = {
+    "qualifying-status": {
+      value: qualifyingStatus,
+      onChange: (value: string | string[]) => setQualifyingStatus(value as string),
+      multiSelect: undefined,
+    },
+    "default-qualifying-status": {
+      value: defaultQualifyingStatus,
+      onChange: (value: string | string[]) => setDefaultQualifyingStatus(value as string),
+      multiSelect: undefined,
+    },
+    "rejection-status": {
+      value: rejectionStatus,
+      onChange: (value: string | string[]) => setRejectionStatus(value as string),
+      multiSelect: undefined,
+    },
+    "rollback-status": {
+      value: rollbackStatus,
+      onChange: (value: string | string[]) => setRollbackStatus(value as string[]),
+      multiSelect: true,
+    },
+  };
 
   return (
     <Layout>
@@ -47,7 +83,9 @@ function Addstage() {
             {/* Left Side  */}
             <div className="flex flex-col gap-5 w-full lg:w-2/3">
               <FormSection title="Basic Details">
-                <FormInput label="Stage Name" placeholder="Enter Stage Name" />
+                {basicDetailsInputs.map((input) => (
+                  <FormInput key={input.id} config={input.config} />
+                ))}
                 <FormTextArea
                   label="Stage Description"
                   placeholder="Enter Stage Description"
@@ -60,147 +98,67 @@ function Addstage() {
               >
                 <ToggleCardGroup columns={3}>
                   {stageCapabilities.map((capability) => (
-                    <ToggleCard
-                      key={capability.id}
-                      title={capability.title}
-                      description={capability.description}
-                      checked={capability.checked}
-                      onChange={() => {}}
-                      icon={capability.icon}
-                    />
+                    <ToggleCard key={capability.id} config={capability.config} />
                   ))}
                 </ToggleCardGroup>
               </FormSection>
 
               <FormSection title="Status Marks">
-                <StatusCard
-                  statusTitle="Status 1"
-                  statusName="Status 1 Name"
-                  subStatuses={[
-                    { id: 1, name: "Sub Status 1" },
-                  ]}
-                  onStatusNameChange={() => {}}
-                  onSubStatusNameChange={() => {}}
-                  onDeleteStatus={() => {}}
-                  onDeleteSubStatus={() => {}}
-                />
-                <StatusCard
-                  statusTitle="Status 1"
-                  statusName="Status 1 Name"
-                  subStatuses={[
-                    { id: 1, name: "Sub Status 1" },
-                  ]}
-                  onStatusNameChange={() => {}}
-                  onSubStatusNameChange={() => {}}
-                  onDeleteStatus={() => {}}
-                  onDeleteSubStatus={() => {}}
-                />
-                <DashedButton label="Add Status" icon={<AddIcon />} onClick={() => {}} backgroundColor="var(--color-border-card-active)" />
+                {statusCardsData.map((status) => (
+                  <StatusCard key={status.id} config={status.config} />
+                ))}
+                <DashedButton config={{ ...addStatusButton.config, icon: <AddIcon /> }} />
               </FormSection>
 
               <FormSection
                 title="Choices"
                 description="Define the steps inside this stage and how each step affects the lead"
               >
-                <FormInput
-                  label="Stage Actions"
-                  placeholder="Select Stage Actions"
-                  value="1"
-                  type="number"
-                />
+                <FormInput config={stageActionsInput.config} />
 
-                <ToggleItem
-                  title="Allow Custom Name"
-                  description="Let users rename a choices when creating it for a lead"
-                  checked={true}
-                  onChange={() => {}}
-                />
-
-                <ToggleItem
-                  title="Auto Pause Other Choices"
-                  description="Pauses other choices when one qualifies"
-                  checked={false}
-                  onChange={() => {}}
-                  disabled
-                />
+                {choiceToggles.map((toggle) => (
+                  <ToggleItem key={toggle.id} config={toggle.config} />
+                ))}
               </FormSection>
             </div>
 
             {/* Right Side  */}
             <div className="w-full lg:w-1/3 flex flex-col gap-5">
               <FormSection title="Stage Order">
-                <FormInput
-                  label="Stage Name"
-                  placeholder=""
-                  value="1"
-                  type="number"
-                />
+                <FormInput config={stageOrderInput.config} />
               </FormSection>
 
               <FormSection title="Status Marks">
-                <FormSelector
-                  label="Qualifying status"
-                  placeholder="Choose qualifying sub status"
-                  options={nestedStatusOptions}
-                  value={qualifyingStatus}
-                  onChange={(value) => setQualifyingStatus(value as string)}
-                  required
-                  showInfoIcon
-                />
-
-                <FormSelector
-                  label="Default Qualifying status"
-                  placeholder="Choose qualifying sub status"
-                  options={nestedStatusOptions}
-                  value={defaultQualifyingStatus}
-                  onChange={(value) => setDefaultQualifyingStatus(value as string)}
-                  required
-                />
-
-                <FormSelector
-                  label="Rejection status"
-                  placeholder="Choose rejection status"
-                  options={nestedStatusOptions}
-                  value={rejectionStatus}
-                  onChange={(value) => setRejectionStatus(value as string)}
-                  required
-                  showInfoIcon
-                />
-
-                <FormSelector
-                  label="Default Rollback Status/Sub-status"
-                  placeholder="Select Status Marks"
-                  options={nestedStatusOptions}
-                  value={rollbackStatus}
-                  onChange={(value) => setRollbackStatus(value as string[])}
-                  multiSelect={true}
-                />
+                {statusFormSelectors.map((selector) => {
+                  const handler = statusHandlers[selector.id as keyof typeof statusHandlers];
+                  return (
+                    <FormSelector
+                      key={selector.id}
+                      config={{
+                        label: selector.label,
+                        placeholder: selector.placeholder,
+                        options: nestedStatusOptions,
+                        value: handler.value,
+                        onChange: handler.onChange,
+                        required: selector.required,
+                        showInfoIcon: selector.showInfoIcon,
+                        multiSelect: handler.multiSelect,
+                      }}
+                    />
+                  );
+                })}
               </FormSection>
 
               <FormSection title="Visibility settings">
-                <ToggleItem
-                  title="Show in Leads profile/drawer"
-                  description="Let users rename a choices when creating it for a lead"
-                  checked={true}
-                  onChange={() => {}}
-                />
-                <ToggleItem
-                  title="Show in Leads profile/drawer"
-                  description="Let users rename a choices when creating it for a lead"
-                  checked={true}
-                  onChange={() => {}}
-                />
+                {visibilityToggles.map((toggle) => (
+                  <ToggleItem key={toggle.id} config={toggle.config} />
+                ))}
               </FormSection>
 
               <FormSection title="Icon">
                 <IconButtonGrid columns={6}>
                   {stageIcons.map((iconData) => (
-                    <IconButton
-                      key={iconData.id}
-                      icon={iconData.icon}
-                      active={iconData.active}
-                      onClick={() => {}}
-                    />
+                    <IconButton key={iconData.id} config={iconData.config} />
                   ))}
                 </IconButtonGrid>
               </FormSection>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Toggle from './Toggle';
 
-interface ToggleCardProps {
+interface ToggleCardConfig {
   icon?: React.ReactNode;
   title: string;
   description: string;
@@ -12,16 +12,21 @@ interface ToggleCardProps {
   infoTooltip?: string;
 }
 
-export function ToggleCard({
-  icon,
-  title,
-  description,
-  checked,
-  onChange,
-  disabled = false,
-  className = '',
-  infoTooltip,
-}: ToggleCardProps) {
+interface ToggleCardProps {
+  config: ToggleCardConfig;
+}
+
+export function ToggleCard({ config }: ToggleCardProps) {
+  const {
+    icon,
+    title,
+    description,
+    checked,
+    onChange,
+    disabled = false,
+    className = '',
+    infoTooltip,
+  } = config;
   const [showTooltip, setShowTooltip] = useState(false);
 
     return (

@@ -20,7 +20,7 @@ export interface SelectedValue {
   color?: string;
 }
 
-interface FormSelectorProps {
+interface FormSelectorConfig {
   label: string;
   placeholder?: string;
   value?: string | string[]; // Single value or array for multi-select
@@ -31,6 +31,10 @@ interface FormSelectorProps {
   required?: boolean;
   multiSelect?: boolean; // Enable multi-select mode
   showInfoIcon?: boolean; // Show info icon next to label
+}
+
+interface FormSelectorProps {
+  config: FormSelectorConfig;
 }
 
 // Color palette for chips (if not provided in option)
@@ -111,18 +115,19 @@ const getFullLabel = (
   return null;
 };
 
-export function FormSelector({
-  label,
-  placeholder = "Select an option",
-  value = "",
-  onChange,
-  options = [],
-  disabled = false,
-  className = "",
-  required = false,
-  multiSelect = false,
-  showInfoIcon = false,
-}: FormSelectorProps) {
+export function FormSelector({ config }: FormSelectorProps) {
+  const {
+    label,
+    placeholder = "Select an option",
+    value = "",
+    onChange,
+    options = [],
+    disabled = false,
+    className = "",
+    required = false,
+    multiSelect = false,
+    showInfoIcon = false,
+  } = config;
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLevel1, setSelectedLevel1] = useState<string | null>(null);
   const [selectedLevel2, setSelectedLevel2] = useState<string | null>(null);

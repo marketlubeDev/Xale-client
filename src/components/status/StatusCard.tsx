@@ -5,7 +5,7 @@ interface SubStatus {
   name: string;
 }
 
-interface StatusCardProps {
+interface StatusCardConfig {
   statusTitle: string;
   statusName: string;
   subStatuses?: SubStatus[];
@@ -16,16 +16,21 @@ interface StatusCardProps {
   className?: string;
 }
 
-export function StatusCard({
-  statusTitle,
-  statusName,
-  subStatuses = [],
-  onStatusNameChange,
-  onSubStatusNameChange,
-  onDeleteStatus,
-  onDeleteSubStatus,
-  className = '',
-}: StatusCardProps) {
+interface StatusCardProps {
+  config: StatusCardConfig;
+}
+
+export function StatusCard({ config }: StatusCardProps) {
+  const {
+    statusTitle,
+    statusName,
+    subStatuses = [],
+    onStatusNameChange,
+    onSubStatusNameChange,
+    onDeleteStatus,
+    onDeleteSubStatus,
+    className = '',
+  } = config;
   return (
     <div className={`bg-white flex flex-col gap-[12px] items-start p-[12px] rounded-[16px] ${className}`}>
       {/* Status Header */}

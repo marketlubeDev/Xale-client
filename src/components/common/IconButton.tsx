@@ -1,4 +1,4 @@
-interface IconButtonProps {
+interface IconButtonConfig {
   icon: React.ReactNode;
   onClick?: () => void;
   active?: boolean;
@@ -6,13 +6,18 @@ interface IconButtonProps {
   className?: string;
 }
 
-export function IconButton({
-  icon,
-  onClick,
-  active = false,
-  disabled = false,
-  className = '',
-}: IconButtonProps) {
+interface IconButtonProps {
+  config: IconButtonConfig;
+}
+
+export function IconButton({ config }: IconButtonProps) {
+  const {
+    icon,
+    onClick,
+    active = false,
+    disabled = false,
+    className = '',
+  } = config;
   return (
     <button
       type="button"

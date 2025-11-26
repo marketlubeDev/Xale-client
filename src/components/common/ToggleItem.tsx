@@ -1,6 +1,6 @@
 import Toggle from './Toggle';
 
-interface ToggleItemProps {
+interface ToggleItemConfig {
   title: string;
   description: string;
   checked: boolean;
@@ -9,14 +9,19 @@ interface ToggleItemProps {
   className?: string;
 }
 
-export function ToggleItem({
-  title,
-  description,
-  checked,
-  onChange,
-  disabled = false,
-  className = '',
-}: ToggleItemProps) {
+interface ToggleItemProps {
+  config: ToggleItemConfig;
+}
+
+export function ToggleItem({ config }: ToggleItemProps) {
+  const {
+    title,
+    description,
+    checked,
+    onChange,
+    disabled = false,
+    className = '',
+  } = config;
   return (
     <div
       className={`flex gap-[12px] items-start w-full ${

@@ -1,4 +1,4 @@
-interface FormInputProps {
+interface FormInputConfig {
   label: string;
   placeholder: string;
   value?: string;
@@ -9,16 +9,21 @@ interface FormInputProps {
   required?: boolean;
 }
 
-export function FormInput({
-  label,
-  placeholder,
-  value = "",
-  onChange,
-  type = "text",
-  disabled = false,
-  className = "",
-  required = false,
-}: FormInputProps) {
+interface FormInputProps {
+  config: FormInputConfig;
+}
+
+export function FormInput({ config }: FormInputProps) {
+  const {
+    label,
+    placeholder,
+    value = "",
+    onChange,
+    type = "text",
+    disabled = false,
+    className = "",
+    required = false,
+  } = config;
   return (
     <div className={`flex flex-col gap-[6px] items-start ${className}`}>
 
