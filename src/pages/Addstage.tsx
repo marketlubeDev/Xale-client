@@ -1,8 +1,7 @@
 import { PageHeader } from "../components/common/PageHeader";
 import { PageSectionHeader } from "../components/common/PageSectionHeader";
 import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
-import Header from "../shared/layouts/Header";
-import Sidebar from "../shared/layouts/Sidebar";
+import Layout from "../shared/layouts/Layout";
 import SecondaryButton from "../components/common/Buttons/SecondaryButton";
 import FormInput from "../components/common/FormInput";
 import FormTextArea from "../components/common/FormTextArea";
@@ -198,17 +197,11 @@ function Addstage() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#eef3f1]">
-      <div className="w-[250px] border-r border-[#e6e8e7] bg-white">
-        <Sidebar />
-      </div>
-      <div className="flex w-full flex-col">
-        <Header />
-
-        <main
-          className="flex flex-1 flex-col justify-start gap-5"
-          style={{ padding: "24px 132px 8px 132px" }}
-        >
+    <Layout>
+      <div
+        className="flex flex-col gap-5"
+        style={{ padding: "24px 132px 24px 132px" }}
+      >
           <PageHeader
             leftContent={
               <PageSectionHeader
@@ -387,9 +380,8 @@ function Addstage() {
               </FormSection>
             </div>
           </div>
-        </main>
       </div>
-    </div>
+    </Layout>
   );
 }
 
