@@ -1,16 +1,22 @@
-import { useState } from 'react';
-import Sidebar from './Sidebar';
-import Header from './Header';
-import type { ReactNode } from 'react';
-import { DropDownHamburgerIcon, SearchIcon, NotificationIcon, SupportIcon } from '../../utilities/icons';
-import XaleLogoImage from '../../assets/sidebar/xaleLogo.svg';
+import { useState } from "react";
+import Sidebar from "../Layout/Sidebar";
+import Header from "./Header";
+import type { ReactNode } from "react";
+import {
+  DropDownHamburgerIcon,
+  SearchIcon,
+  NotificationIcon,
+  SupportIcon,
+} from "../utilities/icons";
+import XaleLogoImage from "../assets/sidebar/xaleLogo.svg";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
+    useState<boolean>(false);
 
   return (
     <div className="flex h-screen bg-[var(--color-background-10)] overflow-hidden">
@@ -33,7 +39,7 @@ export default function Layout({ children }: LayoutProps) {
           fixed top-0 left-0 z-50 h-screen w-[280px] bg-white border-r border-[#e6e8e7]
           transform transition-transform duration-300 ease-in-out
           lg:hidden
-          ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
         {/* Mobile Sidebar Header with Header Content */}
@@ -42,7 +48,11 @@ export default function Layout({ children }: LayoutProps) {
           <div className="border-b border-[#e6e8e7] flex gap-2 items-center px-4 py-4 relative w-full">
             <div className="flex gap-2 items-center relative flex-1">
               <div className="relative shrink-0 w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[var(--color-black-10)] to-[var(--color-black-8)] flex items-center justify-center">
-                <img src={XaleLogoImage} alt="Xale Logo" className="w-[40px] h-[40px]" />
+                <img
+                  src={XaleLogoImage}
+                  alt="Xale Logo"
+                  className="w-[40px] h-[40px]"
+                />
               </div>
               <div className="flex flex-col gap-1 items-start justify-center relative shrink-0">
                 <div className="flex items-center justify-between not-italic relative shrink-0">
@@ -105,12 +115,18 @@ export default function Layout({ children }: LayoutProps) {
 
             {/* Logo */}
             <div className="relative shrink-0 w-[32px] h-[32px] rounded-full bg-gradient-to-br from-[var(--color-black-10)] to-[var(--color-black-8)] flex items-center justify-center">
-              <img src={XaleLogoImage} alt="Xale Logo" className="w-[32px] h-[32px]" />
+              <img
+                src={XaleLogoImage}
+                alt="Xale Logo"
+                className="w-[32px] h-[32px]"
+              />
             </div>
 
             {/* User Info */}
             <div className="flex items-center gap-2 flex-1 min-w-0">
-              <p className="text-sm text-[var(--color-black-8)] tracking-[-0.28px]">Hi,</p>
+              <p className="text-sm text-[var(--color-black-8)] tracking-[-0.28px]">
+                Hi,
+              </p>
               <p className="font-medium text-sm text-[var(--color-black-8)] tracking-[-0.28px] truncate">
                 Sarah Johnson
               </p>
@@ -131,9 +147,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
 
         {/* Scrollable Content */}
-        <main className="flex-1 overflow-y-auto bg-[#eef3f1]">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto bg-[#eef3f1]">{children}</main>
       </div>
     </div>
   );

@@ -749,7 +749,7 @@ export function TrendDownIcon({
   className,
   color = "var(--color-error)",
   size = 20,
-  }: IconProps): React.ReactElement {
+}: IconProps): React.ReactElement {
   return (
     <svg
       className={className}
@@ -766,7 +766,6 @@ export function TrendDownIcon({
     </svg>
   );
 }
-
 
 //........................................................Add stage Icons..............................................................
 
@@ -837,6 +836,89 @@ export function DeleteIcon({
   );
 }
 
+export function CompanyIcon({
+  color = "var(--color-black-4)",
+  size = 24,
+  className,
+}: IconProps): React.ReactElement {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M2 22h20" />
+      <path d="M17 2v20" />
+      <path d="M7 22V7c0-1.1.9-2 2-2h5c1.1 0 2 .9 2 2v15" />
+      <path d="M12 11h.01" />
+      <path d="M12 16h.01" />
+      <path d="M17 6h.01" />
+      <path d="M17 11h.01" />
+      <path d="M17 16h.01" />
+    </svg>
+  );
+}
+export function Catagory({
+  color = "var(--color-black-4)",
+  size = 24,
+  className,
+}: IconProps): React.ReactElement {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path
+        d="M22 8.27V4.23C22 2.64 21.36 2 19.77 2H15.73C14.14 2 13.5 2.64 13.5 4.23V8.27C13.5 9.86 14.14 10.5 15.73 10.5H19.77C21.36 10.5 22 9.86 22 8.27Z"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10.5 8.52V3.98C10.5 2.57 9.86 2 8.27 2H4.23C2.64 2 2 2.57 2 3.98V8.51C2 9.93 2.64 10.49 4.23 10.49H8.27C9.86 10.5 10.5 9.93 10.5 8.52Z"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10.5 19.77V15.73C10.5 14.14 9.86 13.5 8.27 13.5H4.23C2.64 13.5 2 14.14 2 15.73V19.77C2 21.36 2.64 22 4.23 22H8.27C9.86 22 10.5 21.36 10.5 19.77Z"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M14.5 17.5H20.5"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M17.5 20.5V14.5"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+}
 export function InfoIcon({
   color = "var(--color-black-4)",
   size = 16,
@@ -852,26 +934,128 @@ export function InfoIcon({
       fill="none"
     >
       <path
-        d="M8 14.6666C11.6819 14.6666 14.6667 11.6819 14.6667 7.99998C14.6667 4.31808 11.6819 1.33331 8 1.33331C4.3181 1.33331 1.33333 4.31808 1.33333 7.99998C1.33333 11.6819 4.3181 14.6666 8 14.6666Z"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M1 22H23"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <path
-        d="M8 5.33331V8.66665"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M19.78 22.0098V17.5498"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <path
-        d="M7.99634 10.6667H8.00233"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M19.8 10.8901C18.58 10.8901 17.6 11.8701 17.6 13.0901V15.3601C17.6 16.5801 18.58 17.5601 19.8 17.5601C21.02 17.5601 22 16.5801 22 15.3601V13.0901C22 11.8701 21.02 10.8901 19.8 10.8901Z"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M2.09998 21.9998V6.02979C2.09998 4.01979 3.10003 3.00977 5.09003 3.00977H11.32C13.31 3.00977 14.3 4.01979 14.3 6.02979V21.9998"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.79999 8.25H10.75"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.79999 12H10.75"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8.25 22V18.25"
+        stroke="#697571"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
+  );
+}
+export function GoogleIcon({
+  onClick,
+}: {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-16 h-10 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors bg-white cursor-pointer"
+    >
+      <svg className="w-5 h-5" viewBox="0 0 24 24">
+        <path
+          fill="#4285F4"
+          d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+        />
+        <path
+          fill="#34A853"
+          d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+        />
+        <path
+          fill="#FBBC05"
+          d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+        />
+        <path
+          fill="#EA4335"
+          d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+        />
+      </svg>
+    </button>
+  );
+}
+export function AppleIcon({
+  onClick,
+}: {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-16 h-10 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors bg-white cursor-pointer"
+    >
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.45-1.64 3.98-1.54 2.1.12 3.25 1.15 3.96 2.14-3.54 1.73-2.95 6.64.45 8.05-.72 1.6-1.74 2.76-3.47 3.58zM12.94 5.65c.98-1.39.77-3.07.72-3.41-1.35.13-2.97.94-3.76 2.07-.67.97-.87 2.25-.09 3.54 1.39.06 2.28-.73 3.13-2.2z" />
+      </svg>
+    </button>
+  );
+}
+export function FaceBookIcon({
+  onClick,
+}: {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-16 h-10 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors bg-white cursor-pointer"
+    >
+      <svg
+        className="w-5 h-5 text-blue-600"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      </svg>
+    </button>
   );
 }

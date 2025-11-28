@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import XaleLogoImage from '../../assets/sidebar/xaleLogo.svg';
-import { ApplicationIcon, DashboardIcon, LeadsIcon, RotateArrowIcon, StageManagementIcon, VisaIcon } from '../../utilities/icons';
-import SideBarItem from '../../components/sidebar/SideBarItem';
-
-
+import { useState } from "react";
+import XaleLogoImage from "../assets/sidebar/xaleLogo.svg";
+import {
+  ApplicationIcon,
+  DashboardIcon,
+  LeadsIcon,
+  RotateArrowIcon,
+  StageManagementIcon,
+  VisaIcon,
+} from "../utilities/icons";
+import SideBarItem from "../components/sidebar/SideBarItem";
 
 interface SidebarProps {
   showHeader?: boolean;
@@ -20,7 +25,11 @@ export default function Sidebar({ showHeader = true }: SidebarProps) {
         <div className="border-b border-[#e6e8e7] flex gap-2 items-center px-8 py-4 relative w-full h-[80px]">
           <div className="flex gap-2 items-center relative shrink-0">
             <div className="relative shrink-0 w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[var(--color-black-10)] to-[var(--color-black-8)] flex items-center justify-center">
-              <img src={XaleLogoImage} alt="Xale Logo" className="w-[40px] h-[40px]" />
+              <img
+                src={XaleLogoImage}
+                alt="Xale Logo"
+                className="w-[40px] h-[40px]"
+              />
             </div>
             <div className="flex flex-col gap-1 items-start justify-center relative shrink-0">
               <div className="flex items-center justify-between not-italic relative shrink-0 te">
@@ -42,13 +51,18 @@ export default function Sidebar({ showHeader = true }: SidebarProps) {
       )}
 
       {/* Navigation Section */}
-      <div className={`relative flex flex-col gap-1 items-start w-full flex-1 overflow-y-auto ${showHeader ? 'pt-6 px-4 pr-4 pl-8' : 'p-4'}`}>
+      <div
+        className={`relative flex flex-col gap-1 items-start w-full flex-1 overflow-y-auto ${
+          showHeader ? "pt-6 px-4 pr-4 pl-8" : "p-4"
+        }`}
+      >
         {/* Active indicator bar */}
-        {showHeader && <div className="absolute h-10 left-0.5 rounded-br-[20px] rounded-tr-[20px] top-[106px] w-2 bg-[var(--color-black-8)]" />}
-        
+        {showHeader && (
+          <div className="absolute h-10 left-0.5 rounded-br-[20px] rounded-tr-[20px] top-[106px] w-2 bg-[var(--color-black-8)]" />
+        )}
+
         {/* Dashboard Nav Item */}
         <SideBarItem text="Dashboard" icon={<DashboardIcon />} />
-
 
         {/* STAGES Section */}
         <div className="flex flex-col gap-1 items-start px-0 py-1 relative shrink-0 w-full">
@@ -60,7 +74,11 @@ export default function Sidebar({ showHeader = true }: SidebarProps) {
               onClick={() => setIsStagesOpen(!isStagesOpen)}
               className="flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity"
             >
-              <div className={`flex-none transition-transform duration-200 ${isStagesOpen ? 'rotate-180' : ''}`}>
+              <div
+                className={`flex-none transition-transform duration-200 ${
+                  isStagesOpen ? "rotate-180" : ""
+                }`}
+              >
                 <RotateArrowIcon className="overflow-hidden relative w-6 h-6" />
               </div>
             </button>
@@ -111,7 +129,11 @@ export default function Sidebar({ showHeader = true }: SidebarProps) {
               onClick={() => setIsAdminOpen(!isAdminOpen)}
               className="flex items-center justify-center relative shrink-0 cursor-pointer hover:opacity-70 transition-opacity"
             >
-              <div className={`flex-none transition-transform duration-200 ${isAdminOpen ? 'rotate-180' : ''}`}>
+              <div
+                className={`flex-none transition-transform duration-200 ${
+                  isAdminOpen ? "rotate-180" : ""
+                }`}
+              >
                 <RotateArrowIcon className="overflow-hidden relative w-6 h-6" />
               </div>
             </button>
@@ -120,14 +142,14 @@ export default function Sidebar({ showHeader = true }: SidebarProps) {
           {isAdminOpen && (
             <>
               {/* Stage management */}
-             <SideBarItem text="Stage management" icon={<StageManagementIcon />} />  
+              <SideBarItem
+                text="Stage management"
+                icon={<StageManagementIcon />}
+              />
             </>
           )}
         </div>
-
-
       </div>
     </div>
   );
 }
-

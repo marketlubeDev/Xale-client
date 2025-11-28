@@ -2,7 +2,7 @@ import { MoreButton } from "../components/common/Buttons/MoreButton";
 import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
 import PageSectionHeader from "../components/common/PageSectionHeader";
 import PageHeader from "../components/common/PageHeader";
-import Header from "../shared/layouts/Header";
+import Header from "../Layout/Header";
 import Sidebar from "../shared/layouts/Sidebar";
 import { AddIcon } from "../utilities/icons";
 

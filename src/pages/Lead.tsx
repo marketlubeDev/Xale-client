@@ -1,11 +1,10 @@
-
-  import LeadCard, {
+import LeadCard, {
   type LeadCard as LeadCardType,
 } from "../components/leads/LeadCard";
 
 import { useState } from "react";
 import Sidebar from "../shared/layouts/Sidebar";
-import Header from "../shared/layouts/Header";
+import Header from "../Layout/Header";
 import BranchSelector from "../components/common/BranchSelector";
 import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
 import { AddIcon } from "../utilities/icons";
@@ -179,7 +178,6 @@ function App() {
           className="flex flex-1 flex-col justify-start gap-5 lg:px-10"
           style={{ padding: "24px 16px 0 32px" }}
         >
-          
           <div className="flex flex-col gap-5">
             <div className="flex gap-2 justify-between">
               <BranchSelector />
