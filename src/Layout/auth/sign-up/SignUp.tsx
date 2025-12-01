@@ -55,6 +55,7 @@ export default function SignupPage() {
         error?.message ||
         "An error occurred. Please try again.";
       toast.error(message);
+      navigate("/login");
     },
   });
 

@@ -9,26 +9,88 @@ import { LeftArrowIcon, RightArrowIcon } from "../../../utilities/icons";
 import { useGetPathNum } from "../../../hooks/useGetPathNum";
 import { ONBOARDING_STEPS } from "./LayoutOnboardWrapper";
 import { useSelector } from "react-redux";
+import {
+  useOnboarding,
+  type OnboardingFormData,
+} from "../contexts/OnboardingContext";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "../../../../conf/axiosConf";
+import { toast } from "react-toastify";
+import useVerify from "../../../hooks/useVerify";
 
 const IMAGES = [footerIllustration1, footerIllustration2, footerIllustration3];
 
 function LayoutOnboardFooter() {
   const navigate = useNavigate();
+  const { user } = useVerify();
 
   const { isOnBoarded } = useSelector(
     (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
   );
+  const { onBoardingHandleSubmit } = useOnboarding();
 
   // Pass the constant array to your hook
   const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
 
+  const { mutate: onBoard } = useMutation({
+    mutationFn: async (data: OnboardingFormData) => {
+      const body = {
+        tenantName: data.companyName,
+        industryId: Number(data.category),
+      };
+
+      const currentTenant = user?.tenant;
+
+      // ✅ CASE 1: No tenant exists → CREATE
+      if (!user?.tenantId) {
+        return axiosInstance.post("/auth/create-profile", body);
+      }
+
+      // ✅ CASE 2: Tenant exists → CHECK IF UPDATE NEEDED
+      const isChangedName = body.tenantName !== currentTenant?.tenantName;
+      const isChangedIndustry = body.industryId !== currentTenant?.industryId;
+
+      if (isChangedName || isChangedIndustry) {
+        return axiosInstance.patch("/tenant/edit-my-profile", body);
+      }
+
+      // ✅ CASE 3: Nothing changed → safe resolve
+      return Promise.resolve({ data: "No changes detected" });
+    },
+
+    onSuccess: (res) => {
+      console.log("✅ SUCCESS:", res);
+      toast.success("Profile saved");
+    },
+
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong";
+
+      toast.error(message);
+      navigate(ONBOARDING_STEPS[pathNum - 1] || "/login");
+    },
+  });
+
+  // console.log(pathNum, "num");
+
+  const handleOnBoardingSubmit = (data: OnboardingFormData) => {
+    onBoard(data);
+  };
+
   const handleNext = () => {
-    // If we are not at the last step, go to the next one
-    if (pathNum < ONBOARDING_STEPS.length - 1) {
-      navigate(ONBOARDING_STEPS[pathNum + 1]);
+    if (pathNum === 0) {
+      onBoardingHandleSubmit(handleOnBoardingSubmit)();
+      navigate(ONBOARDING_STEPS[1]);
+      console.log("working");
+    } else if (pathNum === 1) {
+      navigate(ONBOARDING_STEPS[2]);
+    } else if (pathNum === 2) {
+      console.log("hitting 3");
     } else {
-      // Logic for the final step (e.g., navigate to dashboard)
-      navigate("/dashboard");
+      console.log(ONBOARDING_STEPS[2]);
     }
   };
 

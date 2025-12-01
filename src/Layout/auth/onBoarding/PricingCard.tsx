@@ -1,50 +1,79 @@
 import { LightGreenBtn } from "../../../components/common/Buttons/LightButton";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
+import type { PlanProps } from "../../hooks/usePlan";
 
 interface PricingCardProps {
-  type?: boolean; // Renamed Boolean to boolean (primitive type is preferred in TS)
+  item: PlanProps;
+  isMonthly: boolean;
 }
 
-const PricingCard = ({ type = false }: PricingCardProps) => {
+const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
+  const type = item.isMostPopular;
+
+  // ✅ Base monthly price
+  const monthlyBase = item.price;
+
+  // ✅ Monthly calculation
+  const monthlyDiscount = item.monthlyOffer || 0;
+  const monthlyFinal = Math.max(monthlyBase - monthlyDiscount, 0);
+
+  // ✅ Yearly calculation
+  const yearlyBase = monthlyBase * 12;
+  const yearlyDiscount = item.yearlyOffer || 0;
+  const yearlyFinal = Math.max(yearlyBase - yearlyDiscount, 0);
+
+  // ✅ Decide current view
+  const originalPrice = isMonthly ? monthlyBase : yearlyBase;
+  const finalPrice = isMonthly ? monthlyFinal : yearlyFinal;
+  const discount = isMonthly ? monthlyDiscount : yearlyDiscount;
+
   return (
     <div className="flex items-center justify-center mt-6 plan-card">
-      {/* Main Card Container */}
       <div
         className={`relative w-full max-w-[450px] rounded-[32px] bg-white p-8 shadow-sm transition-all duration-300 
-          ${type ? "most-popular" : "border border-[#dbece5]"}
-        `}
+        ${type ? "most-popular" : "border border-[#dbece5]"}
+      `}
       >
-        {/* 'Most Popular' Badge - Only shows if type is true */}
+        {/* MOST POPULAR BADGE */}
         {type && <div className="most-popular-tag">Most Popular</div>}
 
-        {/* Header Section */}
+        {/* HEADER */}
         <div className="text-center">
           <h2 className="text-[17px] font-medium text-[#0f392b] tracking-tight mb-2">
-            {type ? "Pro Plan" : "Starter Plan"}
+            {item.name}
           </h2>
 
-          {/* Price Section */}
+          {/* PRICE BLOCK */}
           <div className="flex items-center justify-center gap-3">
-            {/* You can make pricing dynamic here too if needed */}
-            <span className="text-[3rem]  font-medium text-gray-400 line-through decoration-1 decoration-gray-400/80">
-              ₹899
-            </span>
-            <span className="text-[3rem] leading-none font-medium text-[#133d30] tracking-tight">
-              {type ? "₹1,499" : "Free"}
-            </span>
+            {/* STRIKE PRICE */}
+            {discount > 0 && (
+              <span className="text-[2.4rem] font-medium text-gray-400 line-through decoration-1 decoration-gray-400/80">
+                ₹{originalPrice}
+              </span>
+            )}
+
+            {/* FINAL PRICE */}
+            {item.isCustomPlan ? (
+              <span className="text-[2.5rem] my-2 leading-none font-medium text-[#133d30] tracking-tight">
+                {`Starting ₹${finalPrice}`}
+              </span>
+            ) : (
+              <span className="text-[2.5rem]  my-2  leading-none font-medium  text-[#133d30] tracking-tight">
+                {finalPrice === 0 ? "Free" : `₹${finalPrice}`}
+              </span>
+            )}
           </div>
 
-          <p className="mt-2 text-[15px] text-gray-600 font-normal">
-            {type
-              ? "Full features, ideal for growing companies"
-              : "14 days free trial"}
+          {/* DESCRIPTION */}
+          <p className="mt-2 px-5 text-[15px] text-gray-600 font-normal">
+            {item.description}
           </p>
         </div>
 
-        {/* Dashed Divider */}
+        {/* DIVIDER */}
         <div className="my-7 w-full border-t border-dashed border-gray-300/80"></div>
 
-        {/* Button */}
+        {/* CTA */}
         <div className="mb-8">
           {type ? (
             <PrimaryButton
@@ -56,98 +85,45 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
             <LightGreenBtn
               style={{ width: "100%", height: "50px", fontSize: "16px" }}
             >
-              Start free trial
+              {item.isCustomPlan ? "Contact us" : "Start free trial"}
             </LightGreenBtn>
           )}
         </div>
 
-        {/* Features List */}
+        {/* FEATURES */}
         <div className="flex flex-col items-center space-y-[18px]">
-          {/* Active Item 1 */}
-          <div className="flex items-center gap-3 w-full justify-center">
-            <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#133d30] text-white">
-              {/* <Check size={12} strokeWidth={4} /> */}
-            </div>
-            <span className="text-[15px] text-[#133d30]">
-              Add & track leads
-            </span>
-          </div>
+          {[
+            "Add & track leads",
+            "Dashboard & reporting",
+            "Advanced workflows & automation",
+            "Email/SMS integration",
+            "Role-based permissions",
+          ].map((feature, index) => {
+            const locked = !type && index > 1;
 
-          {/* Active Item 2 */}
-          <div className="flex items-center gap-3 w-full justify-center">
-            <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#133d30] text-white">
-              {/* <Check size={12} strokeWidth={4} /> */}
-            </div>
-            <span className="text-[15px] text-[#133d30]">
-              Dashboard & reporting
-            </span>
-          </div>
+            return (
+              <div
+                key={index}
+                className="flex items-center gap-3 w-full justify-center"
+              >
+                <div
+                  className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full 
+                  ${locked ? "border border-gray-300" : "bg-[#133d30]"}
+                `}
+                />
 
-          {/* Item 3 - Conditional Check */}
-          <div className="flex items-center gap-3 w-full justify-center">
-            <div
-              className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full ${
-                type
-                  ? "bg-[#133d30] text-white"
-                  : "border border-gray-300 text-gray-300"
-              }`}
-            >
-              {/* Icon goes here */}
-            </div>
-            <span
-              className={`text-[15px] ${
-                type
-                  ? "text-[#133d30]"
-                  : "text-gray-400 line-through decoration-gray-300"
-              }`}
-            >
-              Advanced workflows & automation
-            </span>
-          </div>
-
-          {/* Item 4 */}
-          <div className="flex items-center gap-3 w-full justify-center">
-            <div
-              className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full ${
-                type
-                  ? "bg-[#133d30] text-white"
-                  : "border border-gray-300 text-gray-300"
-              }`}
-            >
-              {/* Icon goes here */}
-            </div>
-            <span
-              className={`text-[15px] ${
-                type
-                  ? "text-[#133d30]"
-                  : "text-gray-400 line-through decoration-gray-300"
-              }`}
-            >
-              Email/SMS integration
-            </span>
-          </div>
-
-          {/* Item 5 */}
-          <div className="flex items-center gap-3 w-full justify-center">
-            <div
-              className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full ${
-                type
-                  ? "bg-[#133d30] text-white"
-                  : "border border-gray-300 text-gray-300"
-              }`}
-            >
-              {/* Icon goes here */}
-            </div>
-            <span
-              className={`text-[15px] ${
-                type
-                  ? "text-[#133d30]"
-                  : "text-gray-400 line-through decoration-gray-300"
-              }`}
-            >
-              Role-based permissions
-            </span>
-          </div>
+                <span
+                  className={`text-[15px] ${
+                    locked
+                      ? "text-gray-400 line-through decoration-gray-300"
+                      : "text-[#133d30]"
+                  }`}
+                >
+                  {feature}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

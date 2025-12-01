@@ -3,8 +3,10 @@ import OnBoardingInputs from "./OnBoardingInputs";
 import { LocationIcon } from "../../../utilities/icons";
 import { useSelector } from "react-redux";
 import ImageUpload from "../../../components/feature/ImageUploader";
+import useVerify from "../../../hooks/useVerify";
 
 export default function CollectAddress() {
+  useVerify();
   const { isOnBoarded } = useSelector(
     (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
   );

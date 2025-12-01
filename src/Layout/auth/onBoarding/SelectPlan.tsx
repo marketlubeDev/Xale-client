@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import PlanToggle from "./PlanToggle";
 import PricingCard from "./PricingCard";
 import { useState } from "react";
+import { usePlans } from "../../hooks/usePlan";
 
 export default function SelectPlan() {
   const { isOnBoarded } = useSelector(
@@ -13,11 +14,10 @@ export default function SelectPlan() {
   const handleToggle = () => {
     setIsMonthly((val) => !val);
   };
+  const { plans } = usePlans();
+  console.log(plans, "plans");
 
   return (
-    // 1. Removed 'max-w-md' (it was too narrow for 3 cards).
-    // 2. Added 'h-full' and 'overflow-hidden' to force fit within parent container.
-    // 3. Used 'justify-between' to spacing items out naturally.
     <div
       className={`w-full h-full flex flex-col items-center justify-between overflow-hidden relative z-10 py-4 ${
         !isOnBoarded ? "onboarding-anim-2" : ""
@@ -33,14 +33,10 @@ export default function SelectPlan() {
         <PlanToggle onClick={handleToggle} value={isMonthly} />
       </div>
 
-      {/* Middle Section: Cards 
-          The CSS class .plan-container handles the grid.
-          We wrap it to ensure it takes available space. 
-      */}
       <div className="plan-container">
-        <PricingCard />
-        <PricingCard type={true} />
-        <PricingCard />
+        {plans?.map((val) => (
+          <PricingCard item={val} isMonthly={isMonthly} />
+        ))}
       </div>
 
       {/* Bottom Section: Footer 

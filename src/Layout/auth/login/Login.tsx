@@ -13,6 +13,8 @@ import HeadingGradientTextsGreen from "../../../components/common/Texts/HeadingG
 import LargeInput from "../../../components/common/Inputs/LargeInputs";
 import HyperLinkTexts from "../../../components/common/Texts/HyperLinkTexts";
 import { AppleIcon, FaceBookIcon, GoogleIcon } from "../../../utilities/icons";
+import { useDispatch } from "react-redux";
+import { setTokenAndUser } from "../../../../global/authSlice";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -23,6 +25,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -36,11 +39,23 @@ export default function LoginPage() {
     mutationFn: (data: LoginFormData) => {
       return axiosInstance.post("/auth/login", data);
     },
-    onSuccess: (_) => {
-      // Assuming response contains token/user info
+    onSuccess: (res) => {
+      const user = res?.data?.data?.user;
+      const token = res?.data?.token;
+
+      dispatch(setTokenAndUser({ token, user }));
+
+      if (user.profileCompletion < 15) {
+        navigate("/onboarding");
+      } else if (user.profileCompletion === 15) {
+        navigate("/onboarding/company-details");
+      } else if (user.profileCompletion < 20) {
+        navigate("/onboarding/select-plan");
+      } else {
+        window.location.href = "http://localhost:5174";
+      }
+
       toast.success("Welcome back!");
-      // Save token logic here if needed (e.g., localStorage.setItem('token', response.data.token))
-      navigate("/dashboard");
     },
     onError: (error: any) => {
       const message =

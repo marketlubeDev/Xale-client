@@ -8,6 +8,7 @@ import SetupPassword from "../Layout/auth/sign-up/SetupPassword";
 import LayoutOnboardWrapper from "../Layout/auth/components/LayoutOnboardWrapper";
 import CollectAddress from "../Layout/auth/onBoarding/CollectAddress";
 import SelectPlan from "../Layout/auth/onBoarding/SelectPlan";
+import { OnboardingProvider } from "../Layout/auth/contexts/OnboardingContext";
 
 export const router = createBrowserRouter([
   {
@@ -24,29 +25,34 @@ export const router = createBrowserRouter([
   },
   {
     path: "/onboarding",
-    element: <LayoutOnboardWrapper />, // This is the Parent/Layout
+    element: (
+      <OnboardingProvider>
+        <LayoutOnboardWrapper />
+      </OnboardingProvider>
+    ),
     children: [
       {
         // This matches path: "/onboarding" exactly
         index: true,
-        // OPTION A: Render the component directly at /onboarding
         element: <OnBoarding />,
       },
       {
-        // This matches path: "/onboarding/base"
+        // This matches path: "/onboarding/company-details"
         path: "company-details",
         element: <CollectAddress />,
       },
       {
-        // This matches path: "/onboarding/base"
+        // This matches path: "/onboarding/select-plan"
         path: "select-plan",
         element: <SelectPlan />,
       },
       // You can add more steps here, e.g., "profile", "upload", etc.
     ],
   },
-
-  { path: "/create-password", element: <SetupPassword /> },
+  {
+    path: "/create-password",
+    element: <SetupPassword />,
+  },
   {
     path: "*",
     element: <ErrorPage />,
