@@ -1,0 +1,96 @@
+.light-green-btn {
+  /* Base Layout & Box Model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  height: auto;
+  position: relative; /* Essential for anchoring the absolute ::before */
+  color: var(--color-success);
+  /* Borders & Radius */
+  border-radius: 1rem;
+  border: 1px solid #d6e8df;
+
+  /* Colors */
+  background: #e6f4ed;
+  color: #102f23;
+
+  /* Typography */
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: -0.32px;
+
+  /* Effects */
+  box-shadow: 0px 1px 2px 0px rgba(16, 47, 35, 0.05);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  /* Padding Default */
+  padding: 10px 24px;
+
+  /* REMOVED z-index: 1 from here to allow ::before to go behind the background */
+
+  /* Hover State */
+  &:hover:not(:disabled) {
+    background: #d9ebe3;
+    border-color: #c5dcd1;
+    box-shadow: 0px 2px 4px 0px rgba(16, 47, 35, 0.1);
+  }
+
+  /* Disabled State */
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Variant: With Icon */
+  &.with-icon {
+    gap: 8px;
+    padding-left: 16px;
+    padding-right: 24px;
+  }
+
+  /* Icon Wrapper */
+  .btn-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  /* Text Wrapper */
+  .btn-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  /* Pseudo Element (Background/Shadow Layer) */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 3px);
+    height: calc(100% + 2px);
+    transform: translateX(-1.5px);
+
+    /* CHANGED: z-index -1 puts it behind the parent's background */
+    z-index: -1;
+
+    background-color: var(--color-bg-green);
+    /* Optional: Center it if width is > 100% */
+    left: 0%;
+    top: 0%;
+    border-radius: 1rem;
+  }
+}

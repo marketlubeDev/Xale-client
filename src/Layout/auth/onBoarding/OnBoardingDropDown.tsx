@@ -1,4 +1,6 @@
-import React from "react";
+import React, { forwardRef, useState, useEffect } from "react";
+import { type FieldError } from "react-hook-form";
+import InputErrorMessage from "../../../components/common/Texts/InputErrorMessage";
 
 // Define the shape of an option
 export interface SelectOption {
@@ -12,85 +14,152 @@ interface OnBoardingSelectProps
   width?: string;
   Icon: React.ElementType;
   options?: SelectOption[];
-  placeholder?: string;
+  error?: FieldError;
+  containerClassName?: string;
 }
 
-export default function OnBoardingDropDown({
-  label = "Select Option",
-  placeholder = "Select an option",
-  className = "w-full max-w-md",
-  width = "45rem",
-  Icon,
-  options = [{ label: "Education", value: "Education" }],
-  value,
-  ...props
-}: OnBoardingSelectProps) {
-  const figmaShadow =
-    "0px 144px 40px 0px rgba(0, 0, 0, 0.00), 0px 92px 37px 0px rgba(0, 0, 0, 0.00), 0px 52px 31px 0px rgba(0, 0, 0, 0.01), 0px 23px 23px 0px rgba(0, 0, 0, 0.02), 0px 6px 13px 0px rgba(0, 0, 0, 0.02)";
+const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
+  (
+    {
+      label = "Select Option",
+      className = "",
+      containerClassName = "",
+      width = "45rem",
+      Icon,
+      options = [],
+      error,
+      required,
+      value, // Controlled value
+      defaultValue, // Uncontrolled default value
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    const figmaShadow =
+      "0px 144px 40px 0px rgba(0, 0, 0, 0.00), 0px 92px 37px 0px rgba(0, 0, 0, 0.00), 0px 52px 31px 0px rgba(0, 0, 0, 0.01), 0px 23px 23px 0px rgba(0, 0, 0, 0.02), 0px 6px 13px 0px rgba(0, 0, 0, 0.02)";
 
-  // Check if the current value is empty (placeholder state)
-  const isPlaceholderActive = value === "" || value === undefined;
+    // -------------------------------------------------------------------------
+    // Local State for Styling
+    // -------------------------------------------------------------------------
+    // We need to track the value locally to toggle text color (Gray vs Black)
+    // because standard React Hook Form 'register' does not pass the 'value' prop back,
+    // causing the component to remain "uncontrolled" and unaware of changes.
+    const [currentValue, setCurrentValue] = useState<
+      string | number | readonly string[]
+    >(
+      value !== undefined
+        ? value
+        : defaultValue !== undefined
+        ? defaultValue
+        : ""
+    );
 
-  return (
-    <div className={`${className} mb-7`} style={{ minWidth: width }}>
-      <label className="block text-sm font-medium text-emerald-950 mb-2">
-        {label}
-      </label>
+    // Sync local state if parent controls 'value'
+    useEffect(() => {
+      if (value !== undefined) {
+        setCurrentValue(value);
+      }
+    }, [value]);
 
-      <div className="relative">
-        {/* Left Icon */}
-        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-          <Icon color={"#697571"} />
-        </div>
+    // Handle change to update local state (for styling) + call parent handler
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setCurrentValue(e.target.value);
+      if (onChange) {
+        onChange(e);
+      }
+    };
 
-        {/* Select Input */}
-        <select
-          value={value !== undefined ? value : ""}
-          style={{
-            boxShadow: figmaShadow,
-            borderColor: "#E6E8E7",
-          }}
-          className={`
-            appearance-none 
-            block w-full pl-10 pr-10 py-3
-            bg-white 
-            border-[1.5px] 
-            rounded-xl 
-            text-gray-500
-            focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500
-            transition-all duration-200
-            cursor-pointer
-             placeholder:text-gray-500
-            ${isPlaceholderActive ? "text-gray-400" : "text-gray-900"} 
-          `}
-          {...props}
-        >
-          {/* Placeholder Option */}
-          <option value="" disabled className="text-gray-400">
-            {placeholder}
-          </option>
+    // Determine if placeholder is active based on local state
+    const isPlaceholderActive =
+      currentValue === "" || currentValue === undefined;
 
-          {/* Mapped Options */}
-          {options.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              className="text-gray-900" // Ensure options are always dark even if select is gray
-            >
-              {option.label}
+    // -------------------------------------------------------------------------
+    // Styles
+    // -------------------------------------------------------------------------
+    const borderClass = error
+      ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
+      : "border-[#E6E8E7] focus:ring-emerald-500/20 focus:border-emerald-500";
+
+    const iconColor = error ? "#ef4444" : "#697571";
+
+    return (
+      <div className={`mb-7 ${containerClassName}`} style={{ minWidth: width }}>
+        {label && (
+          <label className="block text-sm font-medium text-emerald-950 mb-2">
+            {label}
+            {required && <span className="text-red-500 ml-1">*</span>}
+          </label>
+        )}
+
+        <div className="relative group">
+          {/* Left Icon */}
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none transition-colors duration-200">
+            <Icon color={iconColor} />
+          </div>
+
+          {/* Select Input */}
+          <select
+            ref={ref}
+            required={required}
+            value={value} // Pass value if controlled
+            defaultValue={value === undefined ? "" : undefined} // Force placeholder selection if uncontrolled
+            onChange={handleChange}
+            style={{
+              boxShadow: figmaShadow,
+            }}
+            className={`
+              appearance-none 
+              block w-full 
+              pl-10 pr-10 
+              py-3.5 
+              bg-white 
+              border-[1.5px] 
+              rounded-xl 
+              focus:outline-none focus:ring-2 
+              transition-all duration-200
+              cursor-pointer
+              ${isPlaceholderActive ? "text-gray-400" : "text-gray-900"}
+              ${borderClass}
+              ${className}
+            `}
+            {...props}
+          >
+            {/* Placeholder Option */}
+            <option value="" disabled className="text-gray-400">
+              Select Industry
             </option>
-          ))}
-        </select>
 
-        {/* Right Chevron Icon */}
-        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-          <ChevronDownIcon />
+            {/* Mapped Options */}
+            {options.map((option) => (
+              <option
+                key={option.value}
+                value={option.value}
+                className="text-gray-900"
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
+
+          {/* Right Chevron Icon */}
+          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+            <ChevronDownIcon />
+          </div>
         </div>
-      </div>
-    </div>
-  );
-}
 
+        {/* Dynamic Error Message */}
+        {error && <InputErrorMessage>{error.message}</InputErrorMessage>}
+      </div>
+    );
+  }
+);
+
+OnBoardingDropDown.displayName = "OnBoardingDropDown";
+
+export default OnBoardingDropDown;
+
+// Helper Icon
 function ChevronDownIcon() {
   return (
     <svg

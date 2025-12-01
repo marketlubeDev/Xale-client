@@ -15,7 +15,6 @@ import { AppleIcon, FaceBookIcon, GoogleIcon } from "../../../utilities/icons";
 
 // --- Validation Schema ---
 const signupSchema = z.object({
-  name: z.string().min(3, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
 });
 
@@ -28,21 +27,24 @@ export default function SignupPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
   });
+  console.log("sign-in-page");
 
   const { mutate, isPending } = useMutation({
     // 🟢 B. The 'mutate' function passes the data here as 'data'
     mutationFn: (data: SignupFormData) => {
       return axiosInstance.post("/auth/signup", data);
     },
-    onSuccess: (_) => {
+    onSuccess: (res) => {
       toast.success("Otp Send Successfully");
+      const user = res?.data?.user;
+      console.log(res?.data, "data");
+
       navigate("/otp-verification", {
         state: {
-          email: watch("email"),
+          user,
         },
       });
     },
@@ -66,7 +68,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10">
         {/* Header Section */}
         <HeadingGradientTextsGreen
-          top="Hey there !"
+          top="Hey there"
           bottom="Let's get you into your CRM"
           style={{ marginBottom: "5rem" }}
         />
@@ -74,15 +76,6 @@ export default function SignupPage() {
         {/* Form Section */}
         <div className="w-full space-y-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Full Name Field */}
-
-            <LargeInput
-              type="name"
-              placeholder="Enter your name"
-              error={errors.name}
-              {...register("name")}
-            />
-
             {/* Email Field */}
             <LargeInput
               type="email"
@@ -94,9 +87,6 @@ export default function SignupPage() {
                 pattern: { value: /^\S+@\S+$/, message: "Invalid email" },
               })}
             />
-            <div className="flex justify-end">
-              <HyperLinkTexts to="sign-up">Forgot Email?</HyperLinkTexts>
-            </div>
 
             {/* Submit Button - Black Pill Shape */}
             <PrimaryButton
@@ -113,11 +103,11 @@ export default function SignupPage() {
 
           {/* Divider */}
           <div className="relative flex items-center">
-            <div className="flex-grow border-t border-gray-200"></div>
-            <span className="flex-shrink-0 mx-4 text-xs font-medium text-gray-400 uppercase tracking-wider">
+            <div className="grow border-t border-gray-200"></div>
+            <span className="shrink-0 mx-4 text-xs font-medium text-gray-400 uppercase tracking-wider">
               OR
             </span>
-            <div className="flex-grow border-t border-gray-200"></div>
+            <div className="grow border-t border-gray-200"></div>
           </div>
 
           <div className="text-center text-sm text-gray-500 mb-4">

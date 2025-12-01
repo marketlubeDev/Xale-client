@@ -4,7 +4,7 @@ interface PrimaryButtonProps {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
-  icon?: React.ReactElement;
+  Icon?: React.ElementType;
   style?: React.CSSProperties; // Use CSSProperties for better safety
   children: string;
   // 1. Define the specific type HERE in the interface
@@ -15,7 +15,7 @@ export function PrimaryButton({
   onClick,
   className = "",
   disabled = false,
-  icon,
+  Icon,
   style = {},
   children,
   // 2. Only set the default value here. Do not add type definitions or semicolons.
@@ -24,7 +24,6 @@ export function PrimaryButton({
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const baseStyle: React.CSSProperties = {
-    borderRadius: "12px",
     borderTop: "none",
     borderRight: "0.5px solid #218760",
     borderBottom: "0.9px solid #218760",
@@ -57,19 +56,15 @@ export function PrimaryButton({
       type={type}
       style={{ ...style, ...currentStyle }}
       className={`flex items-center justify-center ${
-        icon ? "gap-[6px] pl-4 pr-6" : "px-6"
-      } py-2.5 text-white font-medium text-base leading-normal tracking-[-0.32px] transition-all min-w-[140px] overflow-hidden ${
+        Icon ? "gap-[6px] pl-4 pr-6" : "px-6"
+      } py-2.5 text-white font-medium text-base leading-normal tracking-[-0.32px] transition-all w-[140px] overflow-hidden rounded-[12px] ${
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
       } ${className}`}
       onMouseEnter={() => !disabled && setIsHovered(true)}
       onMouseLeave={() => !disabled && setIsHovered(false)}
     >
-      {icon && (
-        <span className="shrink-0 w-6 h-6 flex items-center justify-center">
-          {icon}
-        </span>
-      )}
       <span className="truncate min-w-0">{children}</span>
+      {Icon && <Icon />}
     </button>
   );
 }

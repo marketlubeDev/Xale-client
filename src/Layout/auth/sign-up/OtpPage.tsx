@@ -8,19 +8,17 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
 import axiosInstance from "../../../../conf/axiosConf";
-import {
-  setCurrentUser,
-  setToken,
-  setTokenAndUser,
-} from "../../../../global/authSlice";
+import { setTokenAndUser } from "../../../../global/authSlice";
 import LayoutWrapper from "../components/LayoutWrapper";
+// Ensure this path matches your file structure exactly
 import HeadingGradientTextsGreen from "../../../components/common/Texts/HeadingGradientTexts";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
+import Timer from "./Timer";
 
 // --- Validation Schema ---
 const otpSchema = z.object({
   otp: z.string().length(6, "Please enter a complete 6-digit code"),
-  email: z.string().email().optional(), // In case you want to validate email presence
+  email: z.string().email().optional(),
 });
 
 type OtpFormData = z.infer<typeof otpSchema>;
@@ -32,15 +30,22 @@ export default function OTPPage() {
   const [otpArray, setOtpArray] = useState<string[]>(new Array(6).fill(""));
   const [timer, setTimer] = useState(30);
 
-  // Retrieve email passed from Signup Page
-  const userEmail = location.state?.email;
+  console.log("otp page");
 
+  // Retrieve email passed from Signup Page
+  const user = location.state?.user;
+
+  // --- Fix 1: Auth Guard with Early Return ---
+  // Prevent the component from rendering if user is missing to avoid redirect loops or crashes
   useEffect(() => {
-    if (!userEmail) {
-      navigate("/sign-up");
+    if (!user?.email) {
       toast.error("Please login first!");
+      navigate("/sign-up", { replace: true });
     }
-  }, []);
+  }, [user, navigate]);
+
+  // If no user, return null so the rest of the component doesn't render while redirecting
+  if (!user?.email) return null;
 
   // Refs to control focus of the 6 input boxes
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -50,53 +55,45 @@ export default function OTPPage() {
     handleSubmit,
     setValue,
     formState: { errors },
-    trigger, // Used to trigger validation manually
+    trigger,
   } = useForm<OtpFormData>({
     resolver: zodResolver(otpSchema),
     defaultValues: {
       otp: "",
-      email: userEmail,
+      email: user.email,
     },
   });
 
   // --- API Mutation: Validate OTP ---
   const { mutate: submitOtp, isPending } = useMutation({
     mutationFn: (data: OtpFormData) => {
-      // Sending both email and otp to backend
       return axiosInstance.post("/auth/validate-signup-otp", {
-        email: userEmail,
+        email: user.email,
         otp: data.otp,
       });
     },
     onSuccess: (response) => {
       const token = response?.data?.token;
-      const user = response?.data?.data?.user;
-      console.log(user, "user");
+      const userData = response?.data?.data?.user;
 
       dispatch(
         setTokenAndUser({
           token,
-          user,
+          user: userData,
         })
       );
-      if (user?.profileCompletion > 0) {
+      if (userData?.profileCompletion > 0) {
         navigate("/onboarding", {
-          state: {
-            user,
-          },
+          state: { user: userData },
         });
       } else {
         navigate("/create-password", {
-          state: {
-            user,
-          },
+          state: { user: userData },
         });
         toast.success("Email Verified Successfully!");
       }
     },
     onError: (error: any) => {
-      console.log(error, "error");
-
       const message =
         error?.response?.data?.message ||
         error?.message ||
@@ -108,14 +105,15 @@ export default function OTPPage() {
   // --- API Mutation: Resend OTP ---
   const { mutate: resendOtp, isPending: isResending } = useMutation({
     mutationFn: () => {
-      // Usually resend only requires email
       return axiosInstance.post("/auth/otp-send-again", {
-        email: userEmail,
+        email: user.email,
       });
     },
     onSuccess: () => {
       toast.success("Code resent successfully!");
       setTimer(30); // Reset timer
+      // Clear inputs on resend if desired
+      // setOtpArray(new Array(6).fill(""));
     },
     onError: (error: any) => {
       const message =
@@ -126,23 +124,12 @@ export default function OTPPage() {
     },
   });
 
-  // Timer logic
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
-    if (timer > 0) {
-      interval = setInterval(() => {
-        setTimer((prev) => prev - 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [timer]);
-
   // Sync Local Array to RHF
   useEffect(() => {
     const otpString = otpArray.join("");
     setValue("otp", otpString);
     if (otpString.length === 6) {
-      trigger("otp"); // Clear errors if valid
+      trigger("otp");
     }
   }, [otpArray, setValue, trigger]);
 
@@ -184,7 +171,7 @@ export default function OTPPage() {
     }
   };
 
-  const onSubmit = async (data: OtpFormData) => {
+  const onSubmit = (data: OtpFormData) => {
     submitOtp(data);
   };
 
@@ -193,17 +180,17 @@ export default function OTPPage() {
       <div className="w-full max-w-lg mb-[5rem] flex flex-col items-center justify-center grow mt-10 z-10">
         {/* Header Section */}
         <HeadingGradientTextsGreen
-          top="Almost There"
+          top={user?.profileCompletion > 0 ? "Welcome Back" : "Almost there"}
           bottom="We just sent you a code"
           gradient="var(--gradient-text-gray)"
         />
         <p
-          style={{ marginTop: "-1rem", marginBottom: "5rem" }}
-          className="text-b2 text-var(--color-text-gray) flex items-center justify-center  text-nowrap"
+          style={{ marginTop: "-2rem", marginBottom: "5rem" }}
+          className="text-b2 text-var(--color-text-gray) flex items-center justify-center text-nowrap"
         >
           We just sent a 6-digit code to
           <Link to={"/sign-up"} className="text-b2-bold underline ml-1">
-            {userEmail}
+            {user.email}
           </Link>
           . Enter it below to continue
         </p>
@@ -217,16 +204,14 @@ export default function OTPPage() {
           <div className="flex flex-col w-full">
             <div
               className="flex justify-between w-full"
-              style={{
-                gap: "0.5rem",
-              }}
+              style={{ gap: "0.5rem" }}
             >
               {otpArray.map((data, index) => (
                 <input
                   key={index}
                   type="text"
                   maxLength={1}
-                  ref={(el: HTMLInputElement | null) => {
+                  ref={(el) => {
                     inputRefs.current[index] = el;
                   }}
                   value={data}
@@ -262,23 +247,16 @@ export default function OTPPage() {
           </PrimaryButton>
 
           {/* Resend Timer */}
-          <div className="text-b4 text-[var(--color-text-gray)]">
-            Didn't get it?{" "}
-            {timer > 0 ? (
-              <span className="text-[var(--color-text-secondary)]">
-                Resend code in <span className="font-medium">{timer}s</span>
-              </span>
-            ) : (
-              <button
-                type="button"
-                onClick={() => resendOtp()}
-                disabled={isResending}
-                className="font-medium text-[var(--color-black-10)] underline hover:text-black transition-colors disabled:opacity-50 disabled:cursor-wait"
-              >
-                {isResending ? "Resending..." : "Resend code"}
-              </button>
-            )}
-          </div>
+          <Timer seconds={timer}>
+            <button
+              type="button"
+              onClick={() => resendOtp()}
+              disabled={isResending}
+              className="font-medium text-var(--color-black-10) underline hover:text-black transition-colors disabled:opacity-50 disabled:cursor-wait"
+            >
+              {isResending ? "Resending..." : "Resend code"}
+            </button>
+          </Timer>
         </form>
       </div>
     </LayoutWrapper>

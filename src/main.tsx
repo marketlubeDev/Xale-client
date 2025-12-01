@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import "../sass/main.scss";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes.tsx";
 import { QueryClientProvider } from "@tanstack/react-query";

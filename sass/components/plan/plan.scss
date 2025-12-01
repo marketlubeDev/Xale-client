@@ -1,0 +1,57 @@
+.plan-container {
+  width: 80vw;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+
+  & .plan-card {
+    & .most-popular {
+      border: 3px solid var(--color-border-green);
+      z-index: 1;
+
+      &-tag {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-60%);
+
+        /* 1. Remove background here so it doesn't trap the layers */
+        background-color: transparent;
+
+        padding: 2px 10px;
+        font-size: 12px;
+        border-radius: 1rem;
+
+        /* 2. Create the Main Background (Light Green) using ::after */
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0; /* Fills the parent exactly */
+          background-color: #d9ebe3;
+          border-radius: 1rem;
+          z-index: -1; /* Sits behind text */
+        }
+
+        /* 3. The Border/Shadow (Darker Green) using ::before */
+        &::before {
+          content: "";
+          position: absolute;
+          /* Center the pseudo element relative to parent */
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -47%);
+
+          width: calc(100% + 1px); /* Adjusted for even spacing */
+          height: calc(100% + 1px);
+
+          /* 4. Sits behind the ::after layer */
+          z-index: -2;
+
+          background-color: var(--color-bg-green);
+          border-radius: 1rem;
+        }
+      }
+    }
+  }
+}

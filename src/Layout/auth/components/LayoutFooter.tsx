@@ -1,4 +1,5 @@
 import footerIllustration from "../../../assets/images/footer-illustration.svg";
+import LinkSection from "../footer/LinkSection";
 
 function LayoutFooter() {
   return (
@@ -16,21 +17,7 @@ function LayoutFooter() {
       </div>
 
       {/* Links Section */}
-      <div className="flex justify-center space-x-6 pb-6 text-xs text-gray-500">
-        <a
-          href="#"
-          className="hover:text-gray-900 hover:underline transition-colors"
-        >
-          Terms of use
-        </a>
-        <span className="text-gray-300">|</span>
-        <a
-          href="#"
-          className="hover:text-gray-900 hover:underline transition-colors"
-        >
-          Privacy policy
-        </a>
-      </div>
+      <LinkSection />
     </div>
   );
 }

@@ -3,6 +3,7 @@ export interface HeadingGradientTextsProps {
   bottom: string;
   gradient?: string;
   style?: object;
+  gradientClass?: string;
 }
 
 // 1. Add ": HeadingGradientTextsProps" after the destructured object
@@ -11,6 +12,7 @@ export default function HeadingGradientTextsGreen({
   bottom,
   gradient = "var(--gradient-text)",
   style = {},
+  gradientClass = "",
 }: HeadingGradientTextsProps) {
   return (
     <div className="text-center mb-10" style={style}>
@@ -19,8 +21,11 @@ export default function HeadingGradientTextsGreen({
         {top}
       </h2>
       <h2
-        className="-mt-4 text-h1-narrow text-var(--color-black-10) bg-clip-text text-transparent text-nowrap"
-        style={{ backgroundImage: gradient }}
+        className={`-mt-4 text-h1-narrow text-var(--color-black-10) bg-clip-text text-transparent text-nowrap ${gradientClass}`}
+        style={{
+          backgroundImage: gradient,
+          animation: "bg-scale .5s ease forwards",
+        }}
       >
         {bottom}
       </h2>

@@ -19,7 +19,6 @@ export default function useVerify() {
       dispatch(setTokenAndUser({ token, user }));
     },
     onError: (e) => {
-      console.log(e, "error");
       dispatch(logout());
       navigate("/login");
     },

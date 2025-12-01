@@ -49,6 +49,7 @@
   /* Color Variables - Border */
   --color-border-primary: #e6e8e7;
   --color-border-green: #98cdb8;
+  --color-bg-green: #6fb99c;
   --color-border-divider: #b4bab8;
   --color-border-accent: #add7c7;
   --color-border-input: #cdd1d0;
@@ -224,20 +225,28 @@ body {
 @keyframes onboarding-anim-2 {
   0% {
     opacity: 0;
+    transform: scale(1.4);
   }
   100% {
     opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes bg-scale {
+  0% {
+    background-size: 200%;
+  }
+  100% {
+    background-size: 100%;
   }
 }
 .onboarding-anim-2 {
-  animation: onboarding-anim-2 3s ease forwards;
+  animation: onboarding-anim-2 1s ease forwards;
 }
 .onboarding-anim {
-  /* animation: onboarding-anim 10s ease forwards; */
-
   position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: onboarding-anim 6s ease forwards;
+  animation: onboarding-anim 3s ease forwards;
 }

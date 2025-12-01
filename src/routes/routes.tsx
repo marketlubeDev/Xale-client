@@ -7,6 +7,7 @@ import OnBoarding from "../Layout/auth/onBoarding/OnBoarding";
 import SetupPassword from "../Layout/auth/sign-up/SetupPassword";
 import LayoutOnboardWrapper from "../Layout/auth/components/LayoutOnboardWrapper";
 import CollectAddress from "../Layout/auth/onBoarding/CollectAddress";
+import SelectPlan from "../Layout/auth/onBoarding/SelectPlan";
 
 export const router = createBrowserRouter([
   {
@@ -30,14 +31,16 @@ export const router = createBrowserRouter([
         index: true,
         // OPTION A: Render the component directly at /onboarding
         element: <OnBoarding />,
-
-        // OPTION B: If you want the URL to automatically change to /onboarding/base
-        // element: <Navigate to="base" replace />
       },
       {
         // This matches path: "/onboarding/base"
         path: "company-details",
         element: <CollectAddress />,
+      },
+      {
+        // This matches path: "/onboarding/base"
+        path: "select-plan",
+        element: <SelectPlan />,
       },
       // You can add more steps here, e.g., "profile", "upload", etc.
     ],

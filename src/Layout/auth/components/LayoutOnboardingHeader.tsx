@@ -1,4 +1,4 @@
-import React from "react";
+import { useSelector } from "react-redux";
 
 interface LayoutOnboardingHeaderProps {
   num?: number;
@@ -11,15 +11,28 @@ export default function LayoutOnboardingHeader({
 }: LayoutOnboardingHeaderProps) {
   const currentStep = Math.min(Math.max(num, 0), total);
   const progressPercentage = (currentStep / total) * 100;
+  const { isOnBoarded } = useSelector(
+    (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
+  );
 
   return (
-    <div className="flex flex-col items-center justify-center w-full py-6 onboarding-anim-2">
-      {/* Changed max-w-md to max-w-4xl to increase width.
-         You can use max-w-5xl, max-w-full, or w-3/4 to adjust further.
+    <div
+      className={`flex flex-col items-center justify-center w-full py-6 ${
+        !isOnBoarded ? "onboarding-anim-2" : ""
+      }`}
+    >
+      {/* 1. Added 'shadow-inner' to the parent: Makes the track look like an indented groove.
+          2. Changed bg to 'bg-emerald-200/30' for a cleaner track look.
       */}
-      <div className="relative w-full max-w-4xl h-1.5 bg-emerald-100/50 rounded-full overflow-hidden">
+      <div className="relative w-full max-w-4xl h-1.5 bg-emerald-200/30 rounded-full overflow-hidden shadow-inner">
         <div
-          className="h-full bg-emerald-800 rounded-full transition-all duration-500 ease-out"
+          /* 3D CYLINDER EFFECT:
+             - bg-gradient-to-b: Gradient flows Top to Bottom.
+             - from-emerald-400: Lightest color (Top Highlight).
+             - via-emerald-600: Mid-tone (Body of cylinder).
+             - to-emerald-900: Darkest color (Bottom Shadow).
+          */
+          className="h-full rounded-full transition-all duration-500 ease-out bg-gradient-to-b from-emerald-500 via-emerald-600 to-emerald-900 shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
           style={{ width: `${progressPercentage}%` }}
         />
       </div>

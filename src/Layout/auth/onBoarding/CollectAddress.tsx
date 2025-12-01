@@ -1,13 +1,19 @@
-import { usePreventBack } from "../../../hooks/usePreventBack";
 import HeadingGradientTextsGreen from "../../../components/common/Texts/HeadingGradientTexts";
 import OnBoardingInputs from "./OnBoardingInputs";
 import { LocationIcon } from "../../../utilities/icons";
+import { useSelector } from "react-redux";
+import ImageUpload from "../../../components/feature/ImageUploader";
 
 export default function CollectAddress() {
-  usePreventBack();
-
+  const { isOnBoarded } = useSelector(
+    (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
+  );
   return (
-    <div className="w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10 onboarding-anim-2 ">
+    <div
+      className={`w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10 ${
+        !isOnBoarded ? "onboarding-anim-2" : ""
+      }`}
+    >
       {/* Header Section */}
       <HeadingGradientTextsGreen
         top=""
@@ -20,9 +26,19 @@ export default function CollectAddress() {
       >
         Add your logo and address to complete your personalized setup
       </p>
-      <OnBoardingInputs Icon={LocationIcon} />
+      <OnBoardingInputs
+        Icon={LocationIcon}
+        label="Company address"
+        placeholder="Search or type your full address"
+      />
+      <ImageUpload />
+      <OnBoardingInputs
+        Icon={LocationIcon}
+        label=""
+        placeholder="Paste image Url"
+      />
 
-      <div className="h-20 opacity-0">space</div>
+      {/* <div className="h-20 opacity-0">space</div> */}
     </div>
   );
 }
