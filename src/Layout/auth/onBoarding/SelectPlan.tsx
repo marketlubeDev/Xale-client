@@ -9,13 +9,12 @@ export default function SelectPlan() {
   const { isOnBoarded } = useSelector(
     (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
   );
-  const [isMonthly, setIsMonthly] = useState(false);
+  const [isMonthly, setIsMonthly] = useState(true);
 
   const handleToggle = () => {
     setIsMonthly((val) => !val);
   };
   const { plans } = usePlans();
-  console.log(plans, "plans");
 
   return (
     <div

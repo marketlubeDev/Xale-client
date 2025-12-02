@@ -1,6 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
 import { LightGreenBtn } from "../../../components/common/Buttons/LightButton";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
 import type { PlanProps } from "../../hooks/usePlan";
+import axiosInstance from "../../../../conf/axiosConf";
 
 interface PricingCardProps {
   item: PlanProps;
@@ -26,6 +28,30 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
   const originalPrice = isMonthly ? monthlyBase : yearlyBase;
   const finalPrice = isMonthly ? monthlyFinal : yearlyFinal;
   const discount = isMonthly ? monthlyDiscount : yearlyDiscount;
+
+  const { mutate } = useMutation({
+    mutationFn: async (plan: PlanProps) => {
+      const body = {
+        planId: plan.id,
+        planStatus: "TRIAL",
+      };
+      return axiosInstance.patch("/tenant/start-my-plan", body);
+    },
+
+    onSuccess: (_) => {
+      window.location.href = "http://localhost:5174";
+    },
+
+    onError: (err: any) => {
+      console.error("❌ Tenant update failed:");
+    },
+  });
+
+  const handleSelectPlan = (data: PlanProps) => {
+    if (!data.isCustomPlan) {
+      mutate(data);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center mt-6 plan-card">
@@ -77,6 +103,7 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
         <div className="mb-8">
           {type ? (
             <PrimaryButton
+              onClick={() => handleSelectPlan(item)}
               style={{ width: "100%", height: "50px", fontSize: "16px" }}
             >
               Start free trial
@@ -84,6 +111,7 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
           ) : (
             <LightGreenBtn
               style={{ width: "100%", height: "50px", fontSize: "16px" }}
+              onClick={() => handleSelectPlan(item)}
             >
               {item.isCustomPlan ? "Contact us" : "Start free trial"}
             </LightGreenBtn>
