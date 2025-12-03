@@ -9,6 +9,7 @@ interface PrimaryButtonProps {
   children: string;
   // 1. Define the specific type HERE in the interface
   type?: "button" | "submit" | "reset";
+  iconPosition?: "left" | "right";
 }
 
 export function PrimaryButton({
@@ -20,6 +21,7 @@ export function PrimaryButton({
   children,
   // 2. Only set the default value here. Do not add type definitions or semicolons.
   type = "button",
+  iconPosition = "left",
 }: PrimaryButtonProps) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -57,14 +59,15 @@ export function PrimaryButton({
       style={{ ...style, ...currentStyle }}
       className={`flex items-center justify-center ${
         Icon ? "gap-[6px] pl-4 pr-6" : "px-6"
-      } py-2.5 text-white font-medium text-base leading-normal tracking-[-0.32px] transition-all w-[140px] overflow-hidden rounded-[12px] ${
+      } py-2.5 text-white font-medium text-base leading-normal tracking-[-0.32px] transition-all w-[150px] overflow-hidden rounded-[12px] ${
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
       } ${className}`}
       onMouseEnter={() => !disabled && setIsHovered(true)}
       onMouseLeave={() => !disabled && setIsHovered(false)}
     >
+      {Icon && iconPosition === "left" && <Icon />}
       <span className="truncate min-w-0">{children}</span>
-      {Icon && <Icon />}
+      {Icon && iconPosition === "right" && <Icon />}
     </button>
   );
 }

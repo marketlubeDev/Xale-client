@@ -13,6 +13,7 @@ import {
   ListIcon,
   BoardIcon,
 } from "./icons";
+import type { StageData } from "../components/stage/StageSummaryCardActive";
 
 export const nestedStatusOptions = [
   {
@@ -330,5 +331,46 @@ export const statusFormSelectors = [
     label: "Default Rollback Status/Sub-status",
     placeholder: "Select Status Marks",
   },
+];
+
+
+
+
+
+
+export const stagesData: StageData[] = [
+    {
+        stageNumber: 1,
+        title: "Stage 1",
+        statusCount: 10,
+        subStatusCount: 20,
+        badges: [
+            {label: "track", type: "warning" as const}, 
+            {label: "choices", type: "verified" as const}, 
+            {label: "Specific Status", type: "feature" as const}
+        ],
+    },
+    {
+        stageNumber: 2,
+        title: "Stage 2",
+        statusCount: 10,
+        subStatusCount: 20,
+        badges: [
+            {label: "track", type: "warning" as const}, 
+            {label: "choices", type: "verified" as const}, 
+            {label: "Specific Status", type: "feature" as const}
+        ],
+    },
+    {
+        stageNumber: 3,
+        title: "Stage 3",
+        statusCount: 10,
+        subStatusCount: 20,
+        badges: [
+            {label: "track", type: "warning" as const}, 
+            {label: "choices", type: "verified" as const}, 
+            {label: "Specific Status", type: "feature" as const}
+        ],
+    },
 ];
 

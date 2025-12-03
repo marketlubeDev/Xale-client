@@ -9,6 +9,8 @@ import LayoutOnboardWrapper from "../Layout/auth/components/LayoutOnboardWrapper
 import CollectAddress from "../Layout/auth/onBoarding/CollectAddress";
 import SelectPlan from "../Layout/auth/onBoarding/SelectPlan";
 import { OnboardingProvider } from "../Layout/auth/contexts/OnboardingContext";
+import Addstage from "../pages/Addstage";
+import StageManagement from "../pages/StageManagement";
 
 export const router = createBrowserRouter([
   {
@@ -53,8 +55,22 @@ export const router = createBrowserRouter([
     path: "/create-password",
     element: <SetupPassword />,
   },
+
   {
     path: "*",
     element: <ErrorPage />,
+  },
+
+
+
+//Ui create test routes
+
+  {
+    path:"/add-stage",
+    element:<Addstage />,
+  },
+  {
+    path:"/stage-management",
+    element:<StageManagement />,
   },
 ]);

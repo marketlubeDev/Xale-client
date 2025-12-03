@@ -29,6 +29,7 @@ import {
   stageActionsInput,
   addStatusButton,
 } from "../utilities/DummyData";
+// import DraggableItem from "../components/common/DraggableItem";
 
 function Addstage() {
   // Form state
@@ -79,7 +80,7 @@ function Addstage() {
           rightContent={
             <>
               <SecondaryButton title="Cancel" onClick={() => {}} />
-              <PrimaryButton title="Save Stage" onClick={() => {}} />
+              <PrimaryButton children="Save Stage" onClick={() => {}} />
             </>
           }
         />
@@ -133,6 +134,10 @@ function Addstage() {
           <div className="w-full lg:w-1/3 flex flex-col gap-5">
             <FormSection title="Stage Order">
               <FormInput config={stageOrderInput.config} />
+              {/* <DraggableItem label="Enquiry" badgeNumber={1} />
+              <DraggableItem label="Application" badgeNumber={1} />
+              <DraggableItem label="Approved" badgeNumber={1} /> */}
+
             </FormSection>
 
             <FormSection title="Status Marks">

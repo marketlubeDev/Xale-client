@@ -3,8 +3,10 @@ import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
 import PageSectionHeader from "../components/common/PageSectionHeader";
 import PageHeader from "../components/common/PageHeader";
 import Header from "../Layout/Header";
-import Sidebar from "../shared/layouts/Sidebar";
+import Sidebar from "../Layout/Sidebar";
 import { AddIcon } from "../utilities/icons";
+import StageSummaryCardActive from "../components/stage/StageSummaryCardActive";
+import { stagesData } from "../utilities/DummyData";
 
 function StageManagement() {
   return (
@@ -30,14 +32,19 @@ function StageManagement() {
             rightContent={
               <>
                 <PrimaryButton
-                  title="Add Stage"
+                  children="Add Stage"
                   onClick={() => {}}
-                  icon={<AddIcon />}
+                  Icon={AddIcon}
                 />
                 <MoreButton onClick={() => {}} />
+                  
               </>
             }
           />
+
+          {stagesData.map((stage) => (
+              <StageSummaryCardActive key={stage.stageNumber} stage={stage} />
+          ))}
         </main>
       </div>
     </div>
