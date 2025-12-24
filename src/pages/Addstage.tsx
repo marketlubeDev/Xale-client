@@ -69,7 +69,7 @@ function Addstage() {
   return (
     <Layout>
       <div className="flex flex-col gap-5 px-4 py-6 md:px-8 lg:px-24 xl:px-32">
-        <PageHeader
+        {/* <PageHeader
           leftContent={
             <PageSectionHeader
               title="Add Stage"
@@ -82,7 +82,7 @@ function Addstage() {
               <PrimaryButton title="Save Stage" onClick={() => {}} />
             </>
           }
-        />
+        /> */}
 
         <div className="flex flex-col lg:flex-row gap-5 items-start">
           {/* Left Side  */}
@@ -91,10 +91,10 @@ function Addstage() {
               {basicDetailsInputs.map((input) => (
                 <FormInput key={input.id} config={input.config} />
               ))}
-              <FormTextArea
+              {/* <FormTextArea
                 label="Stage Description"
                 placeholder="Enter Stage Description"
-              />
+              /> */}
             </FormSection>
 
             <FormSection
@@ -112,9 +112,9 @@ function Addstage() {
               {statusCardsData.map((status) => (
                 <StatusCard key={status.id} config={status.config} />
               ))}
-              <DashedButton
+              {/* <DashedButton
                 config={{ ...addStatusButton.config, icon: <AddIcon /> }}
-              />
+              /> */}
             </FormSection>
 
             <FormSection
@@ -132,10 +132,11 @@ function Addstage() {
           {/* Right Side  */}
           <div className="w-full lg:w-1/3 flex flex-col gap-5">
             <FormSection title="Stage Order">
-              <FormInput config={stageOrderInput.config} />
+              {/* <FormInput config={stageOrderInput.config} /> */}
+              LS
             </FormSection>
 
-            <FormSection title="Status Marks">
+            {/* <FormSection title="Status Marks">
               {statusFormSelectors.map((selector) => {
                 const handler =
                   statusHandlers[selector.id as keyof typeof statusHandlers];
@@ -155,21 +156,21 @@ function Addstage() {
                   />
                 );
               })}
-            </FormSection>
+            </FormSection> */}
 
             <FormSection title="Visibility settings">
               {visibilityToggles.map((toggle) => (
                 <ToggleItem key={toggle.id} config={toggle.config} />
               ))}
             </FormSection>
-
+            {/* 
             <FormSection title="Icon">
               <IconButtonGrid columns={6}>
                 {stageIcons.map((iconData) => (
                   <IconButton key={iconData.id} config={iconData.config} />
                 ))}
               </IconButtonGrid>
-            </FormSection>
+            </FormSection> */}
           </div>
         </div>
       </div>

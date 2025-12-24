@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import footerIllustration1 from "../../../assets/images/footerIllustration-1.svg";
 import footerIllustration2 from "../../../assets/images/footerIllustration-2.svg";
-import footerIllustration3 from "../../../assets/images/footerIllustration-3.svg";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
 import LinkSection from "../footer/LinkSection";
 import { LightGreenBtn } from "../../../components/common/Buttons/LightButton";
@@ -17,8 +16,9 @@ import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../../../conf/axiosConf";
 import { toast } from "react-toastify";
 import useVerify from "../../../hooks/useVerify";
+import { tenantCreate } from "../endpoints";
 
-const IMAGES = [footerIllustration1, footerIllustration2, footerIllustration3];
+const IMAGES = [footerIllustration1, footerIllustration2];
 
 function LayoutOnboardFooter() {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ function LayoutOnboardFooter() {
 
       // ✅ CASE 1: No tenant exists → CREATE
       if (!user?.tenantId) {
-        return axiosInstance.post("/auth/create-profile", body);
+        return axiosInstance.post(tenantCreate, body);
       }
 
       // ✅ CASE 2: Tenant exists → CHECK IF UPDATE NEEDED
@@ -87,10 +87,6 @@ function LayoutOnboardFooter() {
       console.log("working");
     } else if (pathNum === 1) {
       navigate(ONBOARDING_STEPS[2]);
-    } else if (pathNum === 2) {
-      console.log("hitting 3");
-    } else {
-      console.log(ONBOARDING_STEPS[2]);
     }
   };
 

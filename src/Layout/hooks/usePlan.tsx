@@ -40,15 +40,15 @@ export function usePlans(): UsePlansResult {
   } = useQuery<PlanProps[]>({
     queryKey: ["plans"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/tenant/plan");
-      return res.data.data.plans as PlanProps[];
+      const res = await axiosInstance.get("/platform/plan");
+      return res.data.plans as PlanProps[];
     },
   });
 
   const options: SelectOption[] = plans
-    .filter((plan) => plan.isActive) // Optimize: Only show active plans in dropdowns
+    .filter((plan) => plan.isActive)
     .map((plan) => ({
-      label: `${plan.name} (${plan.currency} ${plan.price})`, // Optimize: informative label
+      label: `${plan.name} (${plan.currency} ${plan.price})`,
       value: plan.id,
     }));
 

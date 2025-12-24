@@ -2,8 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../conf/axiosConf";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout, setTokenAndUser } from "../../global/authSlice";
+import { logout, setCurrentUser } from "../../global/authSlice";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function useVerify() {
   const navigate = useNavigate();
@@ -13,15 +14,16 @@ export default function useVerify() {
     mutationFn: async () => {
       // You can pass payload here if needed, e.g., OTP code
       const response = await axiosInstance.post("/auth/verify");
+
       return response.data;
     },
     onSuccess: (res) => {
-      const { user, token } = res;
-      dispatch(setTokenAndUser({ token, user }));
+      const { user } = res;
+      dispatch(setCurrentUser({ user }));
     },
     onError: (e) => {
-      console.log(e, "e");
-
+      console.log(e);
+      toast.error("Please Login...");
       dispatch(logout());
       navigate("/login");
     },

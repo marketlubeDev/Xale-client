@@ -63,7 +63,7 @@ function OnboardingProvider({ children }: OnboardingProviderProps) {
   });
 
   useEffect(() => {
-    if (user) {
+    if (user?.tenantId) {
       reset({
         companyName: user?.tenant?.tenantName,
         category: user?.tenant?.industryId,

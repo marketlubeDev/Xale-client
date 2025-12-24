@@ -24,8 +24,10 @@ export function useIndustries(): UseIndustriesResult {
   } = useQuery<Industry[]>({
     queryKey: ["industries"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/industry");
-      return res.data.data.industries as Industry[];
+      const res = await axiosInstance.get("/platform/industry");
+      console.log(res, "res");
+
+      return res.data.industries as Industry[];
     },
   });
 
@@ -34,6 +36,8 @@ export function useIndustries(): UseIndustriesResult {
     label: obj.name,
     value: obj.id,
   }));
+
+  console.log(industries, "indus");
 
   return { industries, options, isLoading, error };
 }

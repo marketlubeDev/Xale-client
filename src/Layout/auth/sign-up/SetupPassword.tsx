@@ -15,6 +15,7 @@ import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton"
 import { AppleIcon, FaceBookIcon, GoogleIcon } from "../../../utilities/icons";
 import useVerify from "../../../hooks/useVerify";
 import { usePreventBack } from "../../../hooks/usePreventBack";
+import { setPassword } from "../endpoints";
 
 // --- Validation Schema ---
 const setupPasswordSchema = z
@@ -31,14 +32,10 @@ type SetupPasswordFormData = z.infer<typeof setupPasswordSchema>;
 
 export default function SetupPassword() {
   usePreventBack();
-  const { verify } = useVerify();
+  useVerify();
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state?.user;
-
-  useEffect(() => {
-    verify();
-  }, [verify]);
 
   useEffect(() => {
     if (!user) {
@@ -57,15 +54,13 @@ export default function SetupPassword() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: SetupPasswordFormData) => {
-      return axiosInstance.post("/auth/create-password", data);
+      return axiosInstance.post(setPassword, data);
     },
     onSuccess: (_) => {
       toast.success("Password set successfully!");
-      navigate("/");
+      navigate("/onboarding");
     },
     onError: (error: any) => {
-      console.log(error, "error");
-
       const message =
         error?.response?.data?.message ||
         error?.message ||

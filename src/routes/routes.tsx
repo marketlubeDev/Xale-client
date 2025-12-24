@@ -36,11 +36,11 @@ export const router = createBrowserRouter([
         index: true,
         element: <OnBoarding />,
       },
-      {
-        // This matches path: "/onboarding/company-details"
-        path: "company-details",
-        element: <CollectAddress />,
-      },
+      // {
+      //   // This matches path: "/onboarding/company-details"
+      //   path: "company-details",
+      //   element: <CollectAddress />,
+      // },
       {
         // This matches path: "/onboarding/select-plan"
         path: "select-plan",

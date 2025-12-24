@@ -19,21 +19,19 @@ export default function Layout({ children }: LayoutProps) {
     useState<boolean>(false);
 
   return (
-    <div className="flex h-screen bg-[var(--color-background-10)] overflow-hidden">
+    <div className="flex h-screen bg-var(--color-background-10) overflow-hidden">
       {/* Mobile Overlay */}
       {isMobileSidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-[var(--color-black-8)]/50 lg:hidden"
+          className="fixed inset-0 z-40 bg-var(--color-black-8)/50 lg:hidden"
           onClick={() => setIsMobileSidebarOpen(false)}
         />
       )}
 
       {/* Desktop Sidebar - Hidden on mobile */}
-      <div className="hidden lg:block w-[250px] border-r border-[var(--color-border-primary)] bg-[var(--color-background-10)] flex-shrink-0">
+      <div className="hidden lg:block w-[250px] border-r border-var(--color-border-primary) bg-var(--color-background-10) flex-shrink-0">
         <Sidebar showHeader={true} />
       </div>
-
-      {/* Mobile Sidebar Drawer */}
       <div
         className={`
           fixed top-0 left-0 z-50 h-screen w-[280px] bg-white border-r border-[#e6e8e7]

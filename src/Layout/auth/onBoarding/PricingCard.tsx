@@ -3,6 +3,10 @@ import { LightGreenBtn } from "../../../components/common/Buttons/LightButton";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
 import type { PlanProps } from "../../hooks/usePlan";
 import axiosInstance from "../../../../conf/axiosConf";
+import { onboardingCrm } from "../endpoints";
+import { toast } from "react-toastify";
+import useVerify from "../../../hooks/useVerify";
+import { useSelector } from "react-redux";
 
 interface PricingCardProps {
   item: PlanProps;
@@ -10,6 +14,12 @@ interface PricingCardProps {
 }
 
 const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
+  useVerify();
+
+  const { token } = useSelector(
+    (state: { auth: { token: string | null } }) => state.auth
+  );
+
   const type = item.isMostPopular;
 
   // ✅ Base monthly price
@@ -34,15 +44,18 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
       const body = {
         planId: plan.id,
         planStatus: "TRIAL",
+        billingCycle: isMonthly ? "MONTHLY" : "YEARLY",
       };
-      return axiosInstance.patch("/tenant/start-my-plan", body);
+      return axiosInstance.post(onboardingCrm, body);
     },
 
     onSuccess: (_) => {
-      window.location.href = "http://localhost:5174";
+      window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
     },
 
     onError: (err: any) => {
+      console.log(err, "err");
+      toast.error("Server Error");
       console.error("❌ Tenant update failed:");
     },
   });

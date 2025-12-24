@@ -14,6 +14,7 @@ export default function SelectPlan() {
   const handleToggle = () => {
     setIsMonthly((val) => !val);
   };
+
   const { plans } = usePlans();
 
   return (
@@ -38,9 +39,6 @@ export default function SelectPlan() {
         ))}
       </div>
 
-      {/* Bottom Section: Footer 
-          Changed w-[100vw] to w-full to prevent horizontal scrollbar.
-      */}
       <div className="flex justify-center items-end h-[4rem] w-full shrink-0 text-b2">
         Facing an issue while choosing plan?.
         <a

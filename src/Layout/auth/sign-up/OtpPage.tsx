@@ -14,6 +14,7 @@ import LayoutWrapper from "../components/LayoutWrapper";
 import HeadingGradientTextsGreen from "../../../components/common/Texts/HeadingGradientTexts";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
 import Timer from "./Timer";
+import { validateOtp } from "../endpoints";
 
 // --- Validation Schema ---
 const otpSchema = z.object({
@@ -29,8 +30,6 @@ export default function OTPPage() {
   const location = useLocation();
   const [otpArray, setOtpArray] = useState<string[]>(new Array(6).fill(""));
   const [timer, setTimer] = useState(30);
-
-  console.log("otp page");
 
   // Retrieve email passed from Signup Page
   const user = location.state?.user;
@@ -67,14 +66,15 @@ export default function OTPPage() {
   // --- API Mutation: Validate OTP ---
   const { mutate: submitOtp, isPending } = useMutation({
     mutationFn: (data: OtpFormData) => {
-      return axiosInstance.post("/auth/validate-signup-otp", {
+      return axiosInstance.post(validateOtp, {
         email: user.email,
         otp: data.otp,
       });
     },
     onSuccess: (response) => {
-      const token = response?.data?.token;
+      const token = response?.data?.accessToken;
       const userData = response?.data?.data?.user;
+      console.log(token, userData);
 
       dispatch(
         setTokenAndUser({
@@ -82,11 +82,11 @@ export default function OTPPage() {
           user: userData,
         })
       );
-      if (userData?.profileCompletion > 0) {
+      if (userData?.profileCompletion > 10) {
         navigate("/onboarding", {
           state: { user: userData },
         });
-      } else {
+      } else if (userData?.profileCompletion === 10) {
         navigate("/create-password", {
           state: { user: userData },
         });
@@ -98,6 +98,7 @@ export default function OTPPage() {
         error?.response?.data?.message ||
         error?.message ||
         "Invalid OTP. Please try again.";
+
       toast.error(message);
     },
   });

@@ -12,6 +12,7 @@ import LargeInput from "../../../components/common/Inputs/LargeInputs";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
 import HyperLinkTexts from "../../../components/common/Texts/HyperLinkTexts";
 import { AppleIcon, FaceBookIcon, GoogleIcon } from "../../../utilities/icons";
+import { sighUp } from "../endpoints";
 
 // --- Validation Schema ---
 const signupSchema = z.object({
@@ -30,18 +31,15 @@ export default function SignupPage() {
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
   });
-  console.log("sign-in-page");
 
   const { mutate, isPending } = useMutation({
     // 🟢 B. The 'mutate' function passes the data here as 'data'
     mutationFn: (data: SignupFormData) => {
-      return axiosInstance.post("/auth/signup", data);
+      return axiosInstance.post(sighUp, data);
     },
     onSuccess: (res) => {
       toast.success("Otp Send Successfully");
-      const user = res?.data?.user;
-      console.log(res?.data, "data");
-
+      const user = res?.data?.result?.user;
       navigate("/otp-verification", {
         state: {
           user,

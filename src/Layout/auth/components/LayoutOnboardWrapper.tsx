@@ -8,11 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsOnBoarded } from "../../../../global/basicSlice";
 
 // Define your onboarding steps in order
-export const ONBOARDING_STEPS = [
-  "/onboarding",
-  "/onboarding/company-details",
-  "/onboarding/select-plan",
-];
+export const ONBOARDING_STEPS = ["/onboarding", "/onboarding/select-plan"];
 
 export default function LayoutOnboardWrapper() {
   const [isAnimation, setIsAnimation] = useState(true);

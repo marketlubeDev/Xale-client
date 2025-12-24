@@ -10,6 +10,7 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
     // You can add any default headers here
   },
+  withCredentials: true,
 });
 
 // Optionally, set up interceptors
@@ -17,6 +18,8 @@ axiosInstance.interceptors.request.use(
   (config) => {
     // Example: Add token if present
     const token = localStorage.getItem("xale_access_token");
+    console.log(token, "token");
+
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }

@@ -7,7 +7,7 @@ interface LayoutOnboardingHeaderProps {
 
 export default function LayoutOnboardingHeader({
   num = 1,
-  total = 3,
+  total = 2,
 }: LayoutOnboardingHeaderProps) {
   const currentStep = Math.min(Math.max(num, 0), total);
   const progressPercentage = (currentStep / total) * 100;

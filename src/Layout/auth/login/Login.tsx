@@ -41,9 +41,10 @@ export default function LoginPage() {
     },
     onSuccess: (res) => {
       const user = res?.data?.data?.user;
-      const token = res?.data?.token;
+      const token = res?.data?.accessToken;
 
       dispatch(setTokenAndUser({ token, user }));
+      window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
 
       if (user.profileCompletion < 15) {
         navigate("/onboarding");
@@ -52,7 +53,8 @@ export default function LoginPage() {
       } else if (user.profileCompletion < 20) {
         navigate("/onboarding/select-plan");
       } else {
-        window.location.href = "http://localhost:5174";
+        const token = localStorage.getItem("xale_access_token");
+        window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
       }
 
       toast.success("Welcome back!");

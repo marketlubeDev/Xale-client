@@ -3,7 +3,7 @@ import LeadCard, {
 } from "../components/leads/LeadCard";
 
 import { useState } from "react";
-import Sidebar from "../shared/layouts/Sidebar";
+
 import Header from "../Layout/Header";
 import BranchSelector from "../components/common/BranchSelector";
 import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
@@ -15,6 +15,7 @@ import { Dropdown } from "../components/common/Dropdowns/Dropdown";
 import { FilterButton } from "../components/common/Buttons/FilterButton";
 import ViewSwitcher from "../components/common/ViewSwitcher";
 import { SegmentToggle } from "../components/common/Toggle/SegmentToggle";
+import Sidebar from "../Layout/Sidebar";
 
 function App() {
   const [status, setStatus] = useState<string>("active");

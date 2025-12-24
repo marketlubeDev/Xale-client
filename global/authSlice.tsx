@@ -71,24 +71,29 @@ const authSlice = createSlice({
         localStorage.removeItem("xale_current_user");
       }
     },
-    setTokenAndUser(state, action: PayloadAction<any | null>) {
-      if (action.payload.user) {
-        state.currentUser = action.payload.user;
-        localStorage.setItem(
-          "xale_current_user",
-          JSON.stringify(action.payload)
-        );
+    setTokenAndUser(state, action: PayloadAction<any>) {
+      const { user, token } = action.payload || {};
+      if (user) {
+        state.currentUser = user;
+        localStorage.setItem("xale_current_user", JSON.stringify(user));
       } else {
+        state.currentUser = null;
         localStorage.removeItem("xale_current_user");
       }
-      if (action.payload.token) {
-        state.token = action.payload.token;
-        localStorage.setItem("xale_access_token", action.payload.token);
+
+      if (token) {
+        console.log(token, "token");
+
+        state.token = token;
+
+        localStorage.setItem("xale_access_token", token);
       } else {
+        console.log("hitting error");
+
+        state.token = null;
         localStorage.removeItem("xale_access_token");
       }
     },
-
     logout(state) {
       state.token = null;
       state.currentUser = null;
