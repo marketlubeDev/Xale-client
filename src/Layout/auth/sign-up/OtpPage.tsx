@@ -74,7 +74,6 @@ export default function OTPPage() {
     onSuccess: (response) => {
       const token = response?.data?.accessToken;
       const userData = response?.data?.data?.user;
-      console.log(token, userData);
 
       dispatch(
         setTokenAndUser({
