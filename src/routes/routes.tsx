@@ -6,7 +6,6 @@ import LoginPage from "../Layout/auth/login/Login";
 import OnBoarding from "../Layout/auth/onBoarding/OnBoarding";
 import SetupPassword from "../Layout/auth/sign-up/SetupPassword";
 import LayoutOnboardWrapper from "../Layout/auth/components/LayoutOnboardWrapper";
-import CollectAddress from "../Layout/auth/onBoarding/CollectAddress";
 import SelectPlan from "../Layout/auth/onBoarding/SelectPlan";
 import { OnboardingProvider } from "../Layout/auth/contexts/OnboardingContext";
 
@@ -21,6 +20,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/",
     element: <LoginPage />,
   },
   {

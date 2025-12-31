@@ -4,10 +4,15 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { ChevronRightIcon } from "../utilities/icons";
+import { useEffect } from "react";
 
 export default function ErrorPage() {
   const error = useRouteError();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/");
+  }, [navigate]);
 
   let errorTitle = "Oops!";
   let errorMessage = "Sorry, an unexpected error has occurred.";
