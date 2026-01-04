@@ -62,7 +62,9 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
     },
 
     onSuccess: () => {
-      window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
+      window.location.href = `${
+        import.meta.env.VITE_CRM_URL
+      }/auth-redirect?token=${token}`;
     },
 
     onError: () => {
