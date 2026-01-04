@@ -6,8 +6,7 @@ import { useState } from "react";
 
 import Header from "../Layout/Header";
 import BranchSelector from "../components/common/BranchSelector";
-import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
-import { AddIcon } from "../utilities/icons";
+
 import { MoreButton } from "../components/common/Buttons/MoreButton";
 import Metrics from "../components/common/Metrics";
 import SearchInput from "../components/common/SearchInput";
@@ -183,11 +182,11 @@ function App() {
             <div className="flex gap-2 justify-between">
               <BranchSelector />
               <div className="flex gap-2">
-                <PrimaryButton
+                {/* <PrimaryButton
                   title="Add Lead"
                   onClick={() => {}}
                   icon={<AddIcon />}
-                />
+                /> */}
                 <MoreButton onClick={() => {}} />
               </div>
             </div>

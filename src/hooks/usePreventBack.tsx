@@ -6,7 +6,7 @@ export const usePreventBack = (): void => {
     window.history.pushState(null, "", window.location.href);
 
     // 2. Handler for when the user clicks the "Back" button
-    const handlePopState = (event: PopStateEvent) => {
+    const handlePopState = () => {
       // Prevent the back action by pushing the state again immediately
       window.history.pushState(null, "", window.location.href);
     };

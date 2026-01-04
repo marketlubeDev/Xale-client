@@ -1,16 +1,13 @@
-import { MoreButton } from "../components/common/Buttons/MoreButton";
 import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
 import PageSectionHeader from "../components/common/PageSectionHeader";
 import PageHeader from "../components/common/PageHeader";
 import Header from "../Layout/Header";
-import Sidebar from "../shared/layouts/Sidebar";
-import { AddIcon } from "../utilities/icons";
 
 function StageManagement() {
   return (
     <div className="flex min-h-screen bg-[#eef3f1]">
       <div className="w-[250px] border-r border-[#e6e8e7] bg-white">
-        <Sidebar />
+        {/* <Sidebar /> */}
       </div>
       <div className="flex w-full flex-col">
         <Header />
@@ -29,12 +26,7 @@ function StageManagement() {
             }
             rightContent={
               <>
-                <PrimaryButton
-                  title="Add Stage"
-                  onClick={() => {}}
-                  icon={<AddIcon />}
-                />
-                <MoreButton onClick={() => {}} />
+                <PrimaryButton onClick={() => {}}>Add Stage</PrimaryButton>
               </>
             }
           />

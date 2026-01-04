@@ -920,7 +920,6 @@ export function Catagory({
   );
 }
 export function InfoIcon({
-  color = "var(--color-black-4)",
   size = 16,
   className,
 }: IconProps): React.ReactElement {

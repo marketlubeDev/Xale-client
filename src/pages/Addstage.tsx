@@ -1,71 +1,21 @@
-import { PageHeader } from "../components/common/PageHeader";
-import { PageSectionHeader } from "../components/common/PageSectionHeader";
-import { PrimaryButton } from "../components/common/Buttons/PrimaryButton";
 import Layout from "../Layout/Layout";
-import SecondaryButton from "../components/common/Buttons/SecondaryButton";
 import FormInput from "../components/common/FormInput";
-import FormTextArea from "../components/common/FormTextArea";
 import FormSection from "../components/common/FormSection";
 import ToggleCard from "../components/common/ToggleCard";
-import { AddIcon } from "../utilities/icons";
 import ToggleCardGroup from "../components/common/ToggleCardGroup";
 import ToggleItem from "../components/common/ToggleItem";
-import FormSelector from "../components/common/FormSelector";
-import IconButton from "../components/common/IconButton";
-import IconButtonGrid from "../components/common/IconButtonGrid";
 import StatusCard from "../components/status/StatusCard";
-import { DashedButton } from "../components/common/Buttons/DashedButton";
-import { useState } from "react";
+
 import {
-  nestedStatusOptions,
   stageCapabilities,
-  stageIcons,
   statusCardsData,
   choiceToggles,
   visibilityToggles,
-  statusFormSelectors,
   basicDetailsInputs,
-  stageOrderInput,
   stageActionsInput,
-  addStatusButton,
 } from "../utilities/DummyData";
 
 function Addstage() {
-  // Form state
-  const [qualifyingStatus, setQualifyingStatus] = useState<string>("");
-  const [rejectionStatus, setRejectionStatus] = useState<string>("");
-  const [rollbackStatus, setRollbackStatus] = useState<string[]>([]);
-  const [defaultQualifyingStatus, setDefaultQualifyingStatus] =
-    useState<string>("");
-
-  // Handler mapping for form selectors
-  const statusHandlers = {
-    "qualifying-status": {
-      value: qualifyingStatus,
-      onChange: (value: string | string[]) =>
-        setQualifyingStatus(value as string),
-      multiSelect: undefined,
-    },
-    "default-qualifying-status": {
-      value: defaultQualifyingStatus,
-      onChange: (value: string | string[]) =>
-        setDefaultQualifyingStatus(value as string),
-      multiSelect: undefined,
-    },
-    "rejection-status": {
-      value: rejectionStatus,
-      onChange: (value: string | string[]) =>
-        setRejectionStatus(value as string),
-      multiSelect: undefined,
-    },
-    "rollback-status": {
-      value: rollbackStatus,
-      onChange: (value: string | string[]) =>
-        setRollbackStatus(value as string[]),
-      multiSelect: true,
-    },
-  };
-
   return (
     <Layout>
       <div className="flex flex-col gap-5 px-4 py-6 md:px-8 lg:px-24 xl:px-32">
