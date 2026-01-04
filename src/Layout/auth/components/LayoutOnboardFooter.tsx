@@ -27,9 +27,8 @@ function LayoutOnboardFooter() {
   const { isOnBoarded } = useSelector(
     (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
   );
-  const { onBoardingHandleSubmit } = useOnboarding();
 
-  // Pass the constant array to your hook
+  const { onBoardingHandleSubmit } = useOnboarding();
   const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
 
   const { mutate: onBoard } = useMutation({
@@ -41,12 +40,10 @@ function LayoutOnboardFooter() {
 
       const currentTenant = user?.tenant;
 
-      // ✅ CASE 1: No tenant exists → CREATE
       if (!user?.tenantId) {
         return axiosInstance.post(tenantCreate, body);
       }
 
-      // ✅ CASE 2: Tenant exists → CHECK IF UPDATE NEEDED
       const isChangedName = body.tenantName !== currentTenant?.tenantName;
       const isChangedIndustry = body.industryId !== currentTenant?.industryId;
 
@@ -54,27 +51,18 @@ function LayoutOnboardFooter() {
         return axiosInstance.patch("/tenant/edit-my-profile", body);
       }
 
-      // ✅ CASE 3: Nothing changed → safe resolve
       return Promise.resolve({ data: "No changes detected" });
     },
-
-    onSuccess: (res) => {
-      console.log("✅ SUCCESS:", res);
-      toast.success("Profile saved");
-    },
-
+    onSuccess: () => toast.success("Profile saved"),
     onError: (error: any) => {
-      const message =
+      toast.error(
         error?.response?.data?.message ||
-        error?.message ||
-        "Something went wrong";
-
-      toast.error(message);
+          error?.message ||
+          "Something went wrong"
+      );
       navigate(ONBOARDING_STEPS[pathNum - 1] || "/login");
     },
   });
-
-  // console.log(pathNum, "num");
 
   const handleOnBoardingSubmit = (data: OnboardingFormData) => {
     onBoard(data);
@@ -84,21 +72,26 @@ function LayoutOnboardFooter() {
     if (pathNum === 0) {
       onBoardingHandleSubmit(handleOnBoardingSubmit)();
       navigate(ONBOARDING_STEPS[1]);
-      console.log("working");
     } else if (pathNum === 1) {
       navigate(ONBOARDING_STEPS[2]);
     }
   };
 
   const handleBack = () => {
-    // Explicitly navigate to the previous step in the list
     if (pathNum > 0) {
       navigate(ONBOARDING_STEPS[pathNum - 1]);
     }
   };
 
-  // Determine if we are on the first step to hide the Back button
   const isFirstStep = pathNum === 0;
+
+  /* -------------------------------------------------------------------------- */
+  /* ✅ CONDITIONAL RENDER (SAFE) */
+  /* -------------------------------------------------------------------------- */
+
+  if (pathNum === 1) {
+    return <></>; // or null, AFTER hooks is fine
+  }
 
   return (
     <div
@@ -110,13 +103,11 @@ function LayoutOnboardFooter() {
         className="w-[90vw] m-auto grid grid-cols-3 items-end gap-8 mb-10 px-6"
         style={{ gridTemplateColumns: "1fr auto 1fr" }}
       >
-        {/* Back Button Section */}
         <div className="flex justify-start">
           <LightGreenBtn
             style={{
               width: "15rem",
               opacity: isFirstStep ? "0" : "1",
-              // Critical: prevent clicking when hidden
               pointerEvents: isFirstStep ? "none" : "auto",
             }}
             Icon={LeftArrowIcon}
@@ -126,7 +117,6 @@ function LayoutOnboardFooter() {
           </LightGreenBtn>
         </div>
 
-        {/* Illustration Section */}
         <div className="flex justify-center w-full mb-2">
           <img
             src={IMAGES[pathNum]}
@@ -136,20 +126,17 @@ function LayoutOnboardFooter() {
           />
         </div>
 
-        {/* Continue Button Section */}
         <div className="flex justify-end">
           <PrimaryButton
             style={{ width: "15rem" }}
             onClick={handleNext}
             Icon={RightArrowIcon}
           >
-            {/* Change text if it's the last step (optional) */}
             {pathNum === ONBOARDING_STEPS.length - 1 ? "Finish" : "Continue"}
           </PrimaryButton>
         </div>
       </div>
 
-      {/* Links Section */}
       <LinkSection />
     </div>
   );

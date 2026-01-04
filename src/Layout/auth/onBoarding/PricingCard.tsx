@@ -13,6 +13,16 @@ interface PricingCardProps {
   isMonthly: boolean;
 }
 
+const FEATURES = [
+  "Add & track leads",
+  "Dashboard & reporting",
+  "Advanced workflows & automation",
+  "Email/SMS integration",
+  "Role-based permissions",
+];
+
+const CUSTOM_PLAN_START_PRICE = 2000;
+
 const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
   useVerify();
 
@@ -20,24 +30,26 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
     (state: { auth: { token: string | null } }) => state.auth
   );
 
-  const type = item.isMostPopular;
+  const isPopular = item.isMostPopular;
+  const isCustomPlan = item.isCustomPlan;
 
-  // ✅ Base monthly price
-  const monthlyBase = item.price;
+  /* -------------------------------------------------------------------------- */
+  /* 💰 PRICING LOGIC */
+  /* -------------------------------------------------------------------------- */
 
-  // ✅ Monthly calculation
-  const monthlyDiscount = item.monthlyOffer || 0;
-  const monthlyFinal = Math.max(monthlyBase - monthlyDiscount, 0);
+  const basePrice = Number(item.price);
 
-  // ✅ Yearly calculation
-  const yearlyBase = monthlyBase * 12;
-  const yearlyDiscount = item.yearlyOffer || 0;
-  const yearlyFinal = Math.max(yearlyBase - yearlyDiscount, 0);
+  const monthlyDiscountPercent = item.monthlyOffer || 0;
+  const yearlyDiscountPercent = item.yearlyOffer || 0;
 
-  // ✅ Decide current view
-  const originalPrice = isMonthly ? monthlyBase : yearlyBase;
-  const finalPrice = isMonthly ? monthlyFinal : yearlyFinal;
-  const discount = isMonthly ? monthlyDiscount : yearlyDiscount;
+  const discountPercent = isMonthly
+    ? monthlyDiscountPercent
+    : yearlyDiscountPercent;
+
+  const finalPrice =
+    discountPercent > 0
+      ? Math.max(basePrice - (basePrice * discountPercent) / 100, 0)
+      : basePrice;
 
   const { mutate } = useMutation({
     mutationFn: async (plan: PlanProps) => {
@@ -49,14 +61,12 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
       return axiosInstance.post(onboardingCrm, body);
     },
 
-    onSuccess: (_) => {
+    onSuccess: () => {
       window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
     },
 
-    onError: (err: any) => {
-      console.log(err, "err");
+    onError: () => {
       toast.error("Server Error");
-      console.error("❌ Tenant update failed:");
     },
   });
 
@@ -69,90 +79,91 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
   return (
     <div className="flex items-center justify-center mt-6 plan-card">
       <div
-        className={`relative w-full max-w-[450px] rounded-[32px] bg-white p-8 shadow-sm transition-all duration-300 
-        ${type ? "most-popular" : "border border-[#dbece5]"}
+        className={`relative w-full max-w-[450px] rounded-[32px] bg-white p-8 shadow-sm 
+        ${isPopular ? "most-popular" : "border border-[#dbece5]"}
       `}
       >
         {/* MOST POPULAR BADGE */}
-        {type && <div className="most-popular-tag">Most Popular</div>}
+        {isPopular && <div className="most-popular-tag">Most Popular</div>}
 
         {/* HEADER */}
         <div className="text-center">
-          <h2 className="text-[17px] font-medium text-[#0f392b] tracking-tight mb-2">
+          <h2 className="text-[17px] font-medium text-[#0f392b] mb-2">
             {item.name}
           </h2>
 
-          {/* PRICE BLOCK */}
+          {/* PRICE */}
           <div className="flex items-center justify-center gap-3">
-            {/* STRIKE PRICE */}
-            {discount > 0 && (
-              <span className="text-[2.4rem] font-medium text-gray-400 line-through decoration-1 decoration-gray-400/80">
-                ₹{originalPrice}
+            {!isCustomPlan && discountPercent > 0 && (
+              <span className="text-[2.2rem] text-gray-400 line-through">
+                ₹{basePrice}
               </span>
             )}
 
-            {/* FINAL PRICE */}
-            {item.isCustomPlan ? (
-              <span className="text-[2.5rem] my-2 leading-none font-medium text-[#133d30] tracking-tight">
-                {`Starting ₹${finalPrice}`}
-              </span>
-            ) : (
-              <span className="text-[2.5rem]  my-2  leading-none font-medium  text-[#133d30] tracking-tight">
-                {finalPrice === 0 ? "Free" : `₹${finalPrice}`}
-              </span>
-            )}
+            <span className="text-[2.6rem] font-medium text-[#133d30]">
+              {isCustomPlan
+                ? `Starting ₹${CUSTOM_PLAN_START_PRICE}`
+                : finalPrice === 0
+                ? "Free"
+                : `₹${Math.round(finalPrice)}`}
+            </span>
           </div>
 
-          {/* DESCRIPTION */}
-          <p className="mt-2 px-5 text-[15px] text-gray-600 font-normal">
+          <p className="mt-3 px-5 text-[15px] text-gray-600">
             {item.description}
           </p>
         </div>
 
-        {/* DIVIDER */}
-        <div className="my-7 w-full border-t border-dashed border-gray-300/80"></div>
-
         {/* CTA */}
-        <div className="mb-8">
-          {type ? (
+        <div className="my-8">
+          {isPopular && !isCustomPlan ? (
             <PrimaryButton
               onClick={() => handleSelectPlan(item)}
-              style={{ width: "100%", height: "50px", fontSize: "16px" }}
+              style={{ width: "100%", height: "50px" }}
             >
               Start free trial
             </PrimaryButton>
           ) : (
             <LightGreenBtn
-              style={{ width: "100%", height: "50px", fontSize: "16px" }}
               onClick={() => handleSelectPlan(item)}
+              style={{ width: "100%", height: "50px" }}
             >
-              {item.isCustomPlan ? "Contact us" : "Start free trial"}
+              {isCustomPlan ? "Contact us" : "Start free trial"}
             </LightGreenBtn>
           )}
         </div>
 
         {/* FEATURES */}
         <div className="flex flex-col items-center space-y-[18px]">
-          {[
-            "Add & track leads",
-            "Dashboard & reporting",
-            "Advanced workflows & automation",
-            "Email/SMS integration",
-            "Role-based permissions",
-          ].map((feature, index) => {
-            const locked = !type && index > 1;
+          {FEATURES.map((feature, index) => {
+            const locked = !isCustomPlan && !isPopular && index > 1;
 
             return (
               <div
                 key={index}
                 className="flex items-center gap-3 w-full justify-center"
               >
+                {/* ICON */}
                 <div
                   className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full 
-                  ${locked ? "border border-gray-300" : "bg-[#133d30]"}
-                `}
-                />
+                  ${locked ? "border border-gray-300" : "bg-[#133d30]"}`}
+                >
+                  {!locked && (
+                    <svg
+                      className="w-[12px] h-[12px]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  )}
+                </div>
 
+                {/* TEXT */}
                 <span
                   className={`text-[15px] ${
                     locked
