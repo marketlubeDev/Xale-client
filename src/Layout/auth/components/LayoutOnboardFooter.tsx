@@ -57,8 +57,8 @@ function LayoutOnboardFooter() {
     onError: (error: any) => {
       toast.error(
         error?.response?.data?.message ||
-          error?.message ||
-          "Something went wrong"
+        error?.message ||
+        "Something went wrong"
       );
       navigate(ONBOARDING_STEPS[pathNum - 1] || "/login");
     },
@@ -95,15 +95,11 @@ function LayoutOnboardFooter() {
 
   return (
     <div
-      className={`w-full mt-auto relative z-0 ${
-        !isOnBoarded ? "onboarding-anim-2" : ""
-      }`}
+      className={`w-full mt-auto relative z-0 ${!isOnBoarded ? "onboarding-anim-2" : ""
+        }`}
     >
-      <div
-        className="w-[90vw] m-auto grid grid-cols-3 items-end gap-8 mb-10 px-6"
-        style={{ gridTemplateColumns: "1fr auto 1fr" }}
-      >
-        <div className="flex justify-start">
+      <div className="w-[90vw] m-auto grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center md:items-end gap-8 mb-10 px-6">
+        <div className="hidden lg:flex  justify-center lg:justify-start">
           <LightGreenBtn
             style={{
               width: "15rem",
@@ -117,7 +113,7 @@ function LayoutOnboardFooter() {
           </LightGreenBtn>
         </div>
 
-        <div className="flex justify-center w-full mb-2">
+        <div className="hidden lg:flex justify-center w-full mb-2">
           <img
             src={IMAGES[pathNum]}
             alt="Footer Illustration"
@@ -126,7 +122,7 @@ function LayoutOnboardFooter() {
           />
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-center lg:justify-end">
           <PrimaryButton
             style={{ width: "15rem" }}
             onClick={handleNext}

@@ -6,7 +6,7 @@ function LayoutFooter() {
     <div className="w-full mt-auto relative z-0">
       {/* Illustration Image Section */}
       <div
-        className="w-[80vw] mb-10 flex justify-center "
+        className="hidden md:block w-[80vw] mb-10 flex justify-center "
         style={{ margin: "0 auto", marginBottom: "3rem" }}
       >
         <img

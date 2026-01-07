@@ -8,6 +8,7 @@ import SetupPassword from "../Layout/auth/sign-up/SetupPassword";
 import LayoutOnboardWrapper from "../Layout/auth/components/LayoutOnboardWrapper";
 import SelectPlan from "../Layout/auth/onBoarding/SelectPlan";
 import { OnboardingProvider } from "../Layout/auth/contexts/OnboardingContext";
+import ForgotPasswordPage from "../Layout/auth/forgotPassword/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginPage />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
   },
   {
     path: "/onboarding",

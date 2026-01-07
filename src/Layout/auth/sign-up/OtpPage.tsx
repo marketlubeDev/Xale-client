@@ -186,10 +186,10 @@ export default function OTPPage() {
         />
         <p
           style={{ marginTop: "-2rem", marginBottom: "5rem" }}
-          className="text-b2 text-var(--color-text-gray) flex items-center justify-center text-nowrap"
+          className="text-b2 text-var(--color-text-gray) text-center lg:whitespace-nowrap"
         >
-          We just sent a 6-digit code to
-          <Link to={"/sign-up"} className="text-b2-bold underline ml-1">
+          We just sent a 6-digit code to{" "}
+          <Link to={"/sign-up"} className="text-b2-bold underline">
             {user.email}
           </Link>
           . Enter it below to continue
@@ -219,11 +219,10 @@ export default function OTPPage() {
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   onPaste={handlePaste}
                   style={{ border: "1px solid var(--color-black-8)" }}
-                  className={`h-12 w-18 text-center text-xl md:text-2xl font-medium border rounded-xl outline-none transition-all bg-white 
-                    ${
-                      errors.otp
-                        ? "border-[var(--color-error)] ring-1 ring-[var(--color-error)]"
-                        : data
+                  className={`h-12 w-full max-w-[3rem] sm:max-w-[3.5rem] md:max-w-[4.5rem] text-center text-xl md:text-2xl font-medium border rounded-xl outline-none transition-all bg-white 
+                    ${errors.otp
+                      ? "border-[var(--color-error)] ring-1 ring-[var(--color-error)]"
+                      : data
                         ? "border-[var(--color-black-10)] ring-1 ring-[var(--color-black-10)]"
                         : "border-[var(--color-border-input)] focus:border-[var(--color-black-10)] focus:ring-1 focus:ring-[var(--color-black-10)]"
                     }`}

@@ -51,8 +51,8 @@ const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
       value !== undefined
         ? value
         : defaultValue !== undefined
-        ? defaultValue
-        : ""
+          ? defaultValue
+          : ""
     );
 
     // Sync local state if parent controls 'value'
@@ -84,7 +84,9 @@ const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
     const iconColor = error ? "#ef4444" : "#697571";
 
     return (
-      <div className={`mb-7 ${containerClassName}`} style={{ minWidth: width }}>
+      <div
+        className={`mb-7 w-full min-[1200px]:w-[${width}] ${containerClassName}`}
+      >
         {label && (
           <label className="block text-sm font-medium text-emerald-950 mb-2">
             {label}

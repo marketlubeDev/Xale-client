@@ -17,9 +17,8 @@ export default function OnBoarding() {
 
   return (
     <div
-      className={`w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10 ${
-        !isOnBoarded ? "onboarding-anim-2" : ""
-      }`}
+      className={`w-full max-w-md min-[600px]:max-w-[35rem] min-[1024px]:max-w-[45rem] min-[1200px]:max-w-[45rem] flex flex-col items-center justify-center grow mt-10 z-10 ${!isOnBoarded ? "onboarding-anim-2" : ""
+        }`}
     >
       {/* Header Section */}
       <HeadingGradientTextsGreen top="" bottom="Tell us about your company" />
