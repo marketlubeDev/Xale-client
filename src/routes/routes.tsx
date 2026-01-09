@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
+    path: "/auth-redirect",
+    element: <div>Hello</div>,
+  },
+  {
     path: "/onboarding",
     element: (
       <OnboardingProvider>

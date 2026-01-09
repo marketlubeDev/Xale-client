@@ -72,6 +72,10 @@ export default function LoginPage() {
     mutate(data);
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:3000/api/v1/auth/google";
+  };
+
   return (
     <LayoutWrapper>
       {/* Main Content Content Wrapper */}
@@ -147,7 +151,9 @@ export default function LoginPage() {
             {/* Apple */}
             <AppleIcon />
             {/* Google */}
-            <GoogleIcon />
+            <div onClick={handleGoogleLogin}>
+              <GoogleIcon />
+            </div>
             {/* Facebook */}
             <FaceBookIcon />
           </div>
