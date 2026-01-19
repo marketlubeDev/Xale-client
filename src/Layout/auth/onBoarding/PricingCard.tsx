@@ -7,6 +7,7 @@ import { onboardingCrm } from "../endpoints";
 import { toast } from "react-toastify";
 import useVerify from "../../../hooks/useVerify";
 import { useSelector } from "react-redux";
+import { useOnboarding } from "../contexts/OnboardingContext";
 
 interface PricingCardProps {
   item: PlanProps;
@@ -28,7 +29,11 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
 
   const { token } = useSelector(
     (state: { auth: { token: string | null } }) => state.auth
-  );
+  );  
+
+  const {watch} = useOnboarding()
+
+  const industryId = watch("category");
 
   const isPopular = item.isMostPopular;
   const isCustomPlan = item.isCustomPlan;
@@ -57,7 +62,10 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
         planId: plan.id,
         planStatus: "TRIAL",
         billingCycle: isMonthly ? "MONTHLY" : "YEARLY",
+        industryId:Number(industryId),
       };
+      console.log(body,"body");
+      
       return axiosInstance.post(onboardingCrm, body);
     },
 

@@ -34,6 +34,7 @@ interface OnboardingContextType {
   onBoardingErrors: FieldErrors<OnboardingFormData>;
   onBoardingHandleSubmit: UseFormHandleSubmit<OnboardingFormData>;
   industryConfigs: IndustryConfigs;
+  watch:any
 }
 
 // ---------------- CONTEXT ----------------
@@ -55,6 +56,7 @@ function OnboardingProvider({ children }: OnboardingProviderProps) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm<OnboardingFormData>({
@@ -70,12 +72,14 @@ function OnboardingProvider({ children }: OnboardingProviderProps) {
       });
     }
   }, [reset, user]);
+  
 
   const value: OnboardingContextType = {
     onBoardingRegister: register,
     onBoardingErrors: errors,
     onBoardingHandleSubmit: handleSubmit,
     industryConfigs,
+    watch,
   };
 
   return (
