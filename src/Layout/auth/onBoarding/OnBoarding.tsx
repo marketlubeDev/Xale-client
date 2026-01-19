@@ -12,7 +12,7 @@ export default function OnBoarding() {
   const { isOnBoarded } = useSelector(
     (state: { basic: { isOnBoarded: boolean | null } }) => state.basic
   );
-  const { onBoardingRegister, onBoardingErrors, industryConfigs, watch } =
+  const { onBoardingRegister, onBoardingErrors, industryConfigs } =
     useOnboarding();
   
 
