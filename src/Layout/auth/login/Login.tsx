@@ -46,7 +46,7 @@ export default function LoginPage() {
       const token = res?.data?.accessToken;
 
       dispatch(setTokenAndUser({ token, user }));
-      window.location.href = `${CRM_URL}auth-redirect?token=${token}`;
+      window.location.href = `${CRM_URL}/auth-redirect?token=${token}`;
 
       if (user.profileCompletion < 15) {
         navigate("/onboarding");
@@ -56,7 +56,7 @@ export default function LoginPage() {
         navigate("/onboarding/select-plan");
       } else {
         const token = localStorage.getItem("xale_access_token");
-        window.location.href = `${CRM_URL}auth-redirect?token=${token}`;
+        window.location.href = `${CRM_URL}/auth-redirect?token=${token}`;
       }
 
       toast.success("Welcome back!");
