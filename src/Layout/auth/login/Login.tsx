@@ -23,6 +23,8 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
+const CRM_URL = import.meta.env.VITE_CRM_URL;
+
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,7 +46,7 @@ export default function LoginPage() {
       const token = res?.data?.accessToken;
 
       dispatch(setTokenAndUser({ token, user }));
-      window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
+      window.location.href = `${CRM_URL}auth-redirect?token=${token}`;
 
       if (user.profileCompletion < 15) {
         navigate("/onboarding");
@@ -54,7 +56,7 @@ export default function LoginPage() {
         navigate("/onboarding/select-plan");
       } else {
         const token = localStorage.getItem("xale_access_token");
-        window.location.href = `http://localhost:5174/auth-redirect?token=${token}`;
+        window.location.href = `${CRM_URL}auth-redirect?token=${token}`;
       }
 
       toast.success("Welcome back!");
