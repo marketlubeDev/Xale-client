@@ -8,6 +8,9 @@ import SetupPassword from "../Layout/auth/sign-up/SetupPassword";
 import LayoutOnboardWrapper from "../Layout/auth/components/LayoutOnboardWrapper";
 import SelectPlan from "../Layout/auth/onBoarding/SelectPlan";
 import { OnboardingProvider } from "../Layout/auth/contexts/OnboardingContext";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsOfService from "../pages/TermsOfService";
+import DataDeletion from "../pages/DataDeletion";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +62,18 @@ export const router = createBrowserRouter([
   {
     path: "/create-password",
     element: <SetupPassword />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
+  },
+  {
+    path: "/terms-of-service",
+    element: <TermsOfService />,
+  },
+  {
+    path: "/data-deletion",
+    element: <DataDeletion />,
   },
   {
     path: "*",

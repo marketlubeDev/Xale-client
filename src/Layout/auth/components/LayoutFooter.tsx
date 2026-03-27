@@ -1,5 +1,5 @@
 import footerIllustration from "../../../assets/images/footer-illustration.svg";
-import LinkSection from "../footer/LinkSection";
+import XaleFooter from "../../../components/XaleFooter";
 
 function LayoutFooter() {
   return (
@@ -16,8 +16,8 @@ function LayoutFooter() {
         />
       </div>
 
-      {/* Links Section */}
-      <LinkSection />
+      {/* Footer */}
+      <XaleFooter />
     </div>
   );
 }

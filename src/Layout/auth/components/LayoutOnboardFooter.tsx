@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import footerIllustration1 from "../../../assets/images/footerIllustration-1.svg";
 // import footerIllustration2 from "../../../assets/images/footerIllustration-2.svg";
 import { PrimaryButton } from "../../../components/common/Buttons/PrimaryButton";
-import LinkSection from "../footer/LinkSection";
+import XaleFooter from "../../../components/XaleFooter";
 import { LightGreenBtn } from "../../../components/common/Buttons/LightButton";
 import { LeftArrowIcon, RightArrowIcon } from "../../../utilities/icons";
 import { useGetPathNum } from "../../../hooks/useGetPathNum";
@@ -137,7 +137,7 @@ function LayoutOnboardFooter() {
         </div>
       </div>
 
-      <LinkSection />
+      <XaleFooter />
     </div>
   );
 }

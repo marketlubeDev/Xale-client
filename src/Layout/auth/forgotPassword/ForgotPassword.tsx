@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
+import XaleFooter from "../../../components/XaleFooter";
 
 // Import your custom icons
 import {
@@ -24,7 +25,6 @@ type SignupFormData = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
   const navigate = useNavigate();
-
   // Use your design system variable for icon color
   const iconColor = "var(--color-black-6)";
 
@@ -227,26 +227,11 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* Bottom Illustration & Footer Links */}
+      {/* Footer */}
       <div className="w-full mt-auto relative z-0">
-        <div className="border-t border-gray-200 w-full mb-6"></div>{" "}
-        {/* Line similar to image */}
-        <div className="flex justify-center space-x-6 pb-6 text-xs text-gray-500">
-          <a
-            href="#"
-            className="hover:text-gray-900 hover:underline transition-colors"
-          >
-            Terms of use
-          </a>
-          <span className="text-gray-300">|</span>
-          <a
-            href="#"
-            className="hover:text-gray-900 hover:underline transition-colors"
-          >
-            Privacy policy
-          </a>
-        </div>
+        <XaleFooter />
       </div>
+
     </div>
   );
 }
