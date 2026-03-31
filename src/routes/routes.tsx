@@ -11,8 +11,13 @@ import { OnboardingProvider } from "../Layout/auth/contexts/OnboardingContext";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 import DataDeletion from "../pages/DataDeletion";
+import LandingPage from "../pages/LandingPage";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
   {
     path: "/sign-up",
     element: <SignupPage />,
@@ -23,10 +28,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/",
     element: <LoginPage />,
   },
   {
